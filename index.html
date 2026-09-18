@@ -115,10 +115,6 @@
     }
 
     .opening {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-      gap: clamp(30px, 7vw, 100px);
-      align-items: end;
       min-height: min(64vh, 620px);
       padding: 5vh 0 64px;
       border-bottom: 1px solid var(--hairline);
@@ -131,9 +127,6 @@
     }
     h1 em { color: var(--sanguine); font-weight: 400; }
     .thesis { font-size: clamp(21px, 2.4vw, 29px); line-height: 1.24; margin: 34px 0 0; max-width: 720px; }
-    .margin-thesis { align-self: center; padding-top: 88px; color: var(--ink-soft); font-size: 16px; line-height: 1.45; position: relative; }
-    .margin-thesis::before { content: ""; position: absolute; width: 52px; border-top: 1px solid var(--sanguine); top: 64px; left: 0; }
-    .margin-thesis strong { color: var(--ink); font-weight: 520; }
     .contents { margin: 26px 0 0; padding: 0; list-style: none; font: 11px/1.55 var(--font-technical); text-transform: uppercase; letter-spacing: .045em; }
     .contents li { padding: 5px 0; border-top: 1px solid var(--ghost); }
     .contents a { text-decoration: none; display: block; }
@@ -145,8 +138,6 @@
     p { margin: 0 0 1em; }
     .lede { font-size: 24px; line-height: 1.32; max-width: 760px; }
     .quiet { color: var(--ink-soft); }
-    .inline-series { display: inline-flex; width: 78px; height: 22px; vertical-align: -.38em; margin: 0 .28em; }
-    .inline-series svg { width: 100%; height: 100%; }
 
     .control-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 30px 0 8px; }
     .control {
@@ -234,12 +225,9 @@
     @media (max-width: 760px) {
       body { font-size: 18px; }
       .folio { padding: 22px 18px 70px 24px; }
-      .opening { grid-template-columns: minmax(0, 1fr); gap: 28px; }
-      .opening { min-height: 0; padding: 58px 0 44px; }
+      .opening { padding: 58px 0 44px; }
       h1 { font-size: clamp(50px, 16vw, 76px); max-width: 8ch; }
       .thesis { font-size: 21px; }
-      .margin-thesis { padding-top: 30px; }
-      .margin-thesis::before { top: 11px; }
       .contents { columns: 2; column-gap: 18px; }
       .section { padding: 56px 0; }
       .entry { grid-template-columns: 1fr; gap: 8px; }
@@ -260,24 +248,18 @@
     <div>
       <p class="stamp">Folio 00 / Collected works</p>
       <h1>The <em>Index</em> Folio.</h1>
-      <p class="thesis">Nine working sites on one sheet. Each entry states, in a single line, why it deserves your visit.</p>
+      <p class="thesis">The collected work of C. Dillinger: instruments, labs, and services.</p>
       <ol class="contents">
         <li><a href="#sheet">01 · The sheet</a></li>
         <li><a href="#register">02 · The register</a></li>
         <li><a href="#provenance">03 · Provenance</a></li>
       </ol>
     </div>
-    <aside class="margin-thesis">
-      <strong>Why a folio, not a link list.</strong> A list asks nothing of the visitor. Every entry here argues for its visit, with the evidence beside the claim.
-    </aside>
   </header>
 
   <section class="section" id="sheet">
     <p class="kicker">01 · The sheet</p>
     <h2>Nine sites, three states.</h2>
-    <p class="lede">Six sites are under active revision. Three are settled and kept. Folio 10 is reserved for whatever comes next. Nine sites
-      <span class="inline-series" role="img" aria-label="State mix: 6 under revision, 3 settled"><svg viewBox="0 0 78 22" aria-hidden="true"><g id="mix"></g></svg></span>
-      on one sheet.</p>
     <p class="control-label">Order the sheet by</p>
     <div class="control-row" role="group" aria-label="Ordering">
       <button class="control" data-order="folio" aria-pressed="true">Folio order</button>
@@ -330,7 +312,7 @@
         <span class="entry-no">03</span>
         <div>
           <h3><a href="https://dillingerstaffing.github.io/notebook/">Notebook</a></h3>
-          <p class="verdict">Come to read the design language this very page follows: how a working notebook thinks, sourced to Leonardo, Tufte, and Distill.</p>
+          <p class="verdict">Come to read a working notebook's design language: material grammar, composition, and built examples, sourced to Leonardo, Tufte, and Distill.</p>
           <p class="entry-meta"><span class="st-committed">Settled</span> · 10 sections · 31 sources · checked 2026-09-17</p>
           <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> the complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit. <strong>For:</strong> designers and builders who want the method, not the costume.</div></details>
           <a class="visit" href="https://dillingerstaffing.github.io/notebook/">Visit the notebook</a>
@@ -408,8 +390,7 @@
 
   <section class="section" id="provenance">
     <p class="kicker">03 · Provenance</p>
-    <h2>Checked, not assumed.</h2>
-    <p class="lede">All nine sites confirmed serving on 2026-09-17. Measures are from working notes of the same date.</p>
+    <h2>Provenance.</h2>
     <ul class="source-list">
       <li><span class="src-no">01</span><div><a href="https://dillingerstaffing.github.io/portfolio/">dillingerstaffing.github.io/portfolio/</a></div></li>
       <li><span class="src-no">02</span><div><a href="https://dillingerstaffing.github.io/proving-ground/">dillingerstaffing.github.io/proving-ground/</a></div></li>
@@ -424,7 +405,7 @@
   </section>
 
   <footer class="final-mark">
-    <div><strong>The Index Folio.</strong><br />Set in the Notebook design language. Folio 00.</div>
+    <div><strong>The Index Folio.</strong><br />Folio 00.</div>
     <div class="folio-id">C. Dillinger<br />Working index</div>
   </footer>
 </div>
@@ -555,16 +536,6 @@
       setPressed(btn.parentElement, btn);
     });
   });
-
-  (function drawMix() {
-    var g = document.getElementById('mix');
-    if (!g) return;
-    var colors = { working: 'var(--sanguine)', committed: 'var(--ink)' };
-    var order = entries.slice().sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-    g.innerHTML = order.map(function (s, i) {
-      return '<rect x="' + (i * 8.6) + '" y="4" width="5.4" height="14" fill="' + colors[s.state] + '"/>';
-    }).join('');
-  })();
 
   window.addEventListener('resize', drawLeaders);
   window.addEventListener('load', function () { drawLeaders(); });
