@@ -1,0 +1,32 @@
+# The Index Folio
+
+One folio indexing every working site by Chris Dillinger, at https://dillingerstaffing.github.io/.
+Each entry states, in a single line, why the site deserves a visit, with the evidence beside the claim.
+The page is written in full in the Notebook design language (https://dillingerstaffing.github.io/notebook/):
+material grammar (underdrawing, working, committed ink), composition grammar (adjacency, direct keying,
+evidence margins, small multiples), and the information flow answer, evidence, revision, source.
+
+## Sites
+
+- Portfolio (https://dillingerstaffing.github.io/portfolio/): first-principles RISC-V, C, and OS kernel work.
+  Every claim backed by a runnable demo. Visit to vet the work and to hire Chris for board, firmware, or kernel problems.
+- Proving Ground (https://dillingerstaffing.github.io/proving-ground/): 70 interactive benches, one mechanism each,
+  taught why-first. Visit to build engineering intuition you can check by hand.
+- Notebook (https://dillingerstaffing.github.io/notebook/): the complete design language this index is written in,
+  sourced to Leonardo, Tufte, and Distill. Visit to learn the method.
+- GHOSTLIGHT (https://dillingerstaffing.github.io/ghostlight/): red-team walkthroughs of MITRE ATT&CK TA0005 stealth
+  techniques, each with a red demo and a blue demo. Visit to learn attack and detection together.
+- Wigmore (https://dillingerstaffing.github.io/wigmore/): an evidence-chart playground for laying out arguments as
+  claims, support, and doubt, shareable by link. Visit to reason in public.
+- OLD IRON (https://dillingerstaffing.github.io/old-iron/): retirement for servers and GPUs. Free pickup, certified
+  NIST 800-88 data wiping, insured logistics. Visit when hardware is done earning.
+- TAPEOUT (https://dillingerstaffing.github.io/tapeout/): lean compute-hardware distribution. Quoted parts, burn-in
+  tested, honest R&D log. Visit to buy parts without theater.
+- UNSTUCK (https://dillingerstaffing.github.io/unstuck/): computer help in plain words, one visit at a time.
+  Visit when the machine wins.
+- Signs (https://dillingerstaffing.github.io/signs/): an experiment classifying text into Peirce's ten sign classes.
+  Visit to watch the machine read.
+
+## Contact
+
+Hire or reach Chris through the portfolio: https://dillingerstaffing.github.io/portfolio/

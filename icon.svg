@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#e9e3d5"/>
+  <rect x="18" y="18" width="476" height="476" fill="none" stroke="#a59b87" stroke-width="2"/>
+  <text x="256" y="308" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="228" fill="#1d1c18" letter-spacing="-8">00</text>
+  <line x1="106" y1="356" x2="406" y2="356" stroke="#8b3e2f" stroke-width="6"/>
+  <text x="256" y="412" text-anchor="middle" font-family="'Courier New', monospace" font-size="30" letter-spacing="10" fill="#5d574c">INDEX</text>
+</svg>
