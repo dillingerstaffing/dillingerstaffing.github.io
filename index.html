@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <title>The Index Folio, Chris Dillinger</title>
-  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language. Each entry states why it deserves your visit." />
+  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language. Each entry states why it deserves a visit." />
   <link rel="canonical" href="https://dillingerstaffing.github.io/" />
   <meta property="og:title" content="The Index Folio, Chris Dillinger" />
   <meta property="og:description" content="Nine working sites on one page. Each entry states, in a single line, why it deserves your visit." />
@@ -108,15 +108,15 @@
       background: var(--ghost);
       pointer-events: none;
     }
-    .stamp, .kicker, .entry-no, .readout, .src-no {
+    .stamp, .kicker, .mono {
       font-family: var(--font-technical);
       letter-spacing: .055em;
       text-transform: uppercase;
     }
 
     .opening {
-      min-height: min(64vh, 620px);
-      padding: 5vh 0 64px;
+      min-height: min(52vh, 520px);
+      padding: 5vh 0 56px;
       border-bottom: 1px solid var(--hairline);
     }
     .stamp { color: var(--sanguine); font-size: 11px; margin: 0 0 26px; }
@@ -127,19 +127,19 @@
     }
     h1 em { color: var(--sanguine); font-weight: 400; }
     .thesis { font-size: clamp(21px, 2.4vw, 29px); line-height: 1.24; margin: 34px 0 0; max-width: 720px; }
-    .contents { margin: 26px 0 0; padding: 0; list-style: none; font: 11px/1.55 var(--font-technical); text-transform: uppercase; letter-spacing: .045em; }
+    .contents { margin: 26px 0 0; padding: 0; list-style: none; font: 11px/1.55 var(--font-technical); text-transform: uppercase; letter-spacing: .045em; max-width: 520px; }
     .contents li { padding: 5px 0; border-top: 1px solid var(--ghost); }
     .contents a { text-decoration: none; display: block; }
 
-    .section { padding: 78px 0; border-bottom: 1px solid var(--hairline); }
-    .kicker { font-size: 11px; color: var(--sanguine); margin-bottom: 12px; }
+    .section { padding: 72px 0; border-bottom: 1px solid var(--hairline); }
+    .kicker { font-size: 11px; color: var(--sanguine); margin: 0 0 12px; }
     h2 { margin: 0 0 26px; font-size: clamp(35px, 5.2vw, 64px); line-height: .95; font-weight: 400; letter-spacing: -.035em; }
     h3 { font-size: 26px; line-height: 1.08; margin: 0 0 8px; font-weight: 520; }
     p { margin: 0 0 1em; }
-    .lede { font-size: 24px; line-height: 1.32; max-width: 760px; }
     .quiet { color: var(--ink-soft); }
 
-    .control-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 30px 0 8px; }
+    .control-label { font: 10px/1.4 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--ink-soft); margin: 30px 0 0; }
+    .control-row { display: flex; gap: 6px; flex-wrap: wrap; margin: 8px 0 0; }
     .control {
       border: 1px solid var(--hairline);
       border-radius: 0;
@@ -152,55 +152,43 @@
       cursor: pointer;
     }
     .control[aria-pressed="true"] { color: var(--ink); border-color: var(--sanguine); background: var(--sanguine-soft); }
-    .control-label { font: 10px/1.4 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--ink-soft); margin: 26px 0 0; }
 
-    .sheet { margin-top: 26px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); background: var(--wash); position: relative; }
-    .register-band { border-bottom: 1px solid var(--ghost); padding: 18px clamp(16px, 3vw, 30px) 22px; position: relative; }
-    .register-band:last-child { border-bottom: 0; }
-    .band-label { font: 10px/1.4 var(--font-technical); text-transform: uppercase; letter-spacing: .06em; margin: 0 0 4px; }
-    .band-label.under { color: var(--graphite); }
-    .band-label.work { color: var(--sanguine); }
-    .band-label.commit { color: var(--ink); }
-    .band-sub { font-size: 14px; color: var(--ink-soft); margin: 0 0 14px; }
-    .folio-row { display: flex; flex-wrap: wrap; gap: 10px; }
-    .folio-block {
-      border: 1px solid var(--hairline);
-      background: var(--paper);
-      padding: 10px 12px 9px;
-      min-width: 148px; max-width: 210px; flex: 1 1 150px;
-      text-decoration: none;
-      position: relative;
-    }
-    .folio-block .entry-no { font-size: 10px; margin-bottom: 6px; display: block; }
-    .folio-block .entry-name { font-size: 20px; font-weight: 520; line-height: 1.05; display: block; }
-    .folio-block[data-state="underdrawing"] .entry-no { color: var(--graphite); }
-    .folio-block[data-state="working"] { border-color: var(--sanguine); }
-    .folio-block[data-state="working"] .entry-no { color: var(--sanguine); }
-    .folio-block[data-state="committed"] .entry-no { color: var(--ink); }
-    .folio-block[data-state="underdrawing"] { border-style: dashed; color: var(--ink-soft); }
-    .sheet[data-focus]:not([data-focus="all"]) [data-lyr] { opacity: .14; transition: opacity 180ms ease; }
-    .sheet[data-focus="underdrawing"] [data-lyr="underdrawing"],
-    .sheet[data-focus="working"] [data-lyr="working"],
-    .sheet[data-focus="committed"] [data-lyr="committed"] { opacity: 1; }
-    .cross-note {
-      position: absolute; right: 4%; top: 14px; width: 220px;
-      padding-top: 9px; border-top: 1px solid var(--sanguine);
-      color: var(--ink-soft); font-size: 13px; line-height: 1.4;
-    }
-    .readout { font-size: 11px; color: var(--sanguine); margin: 14px 0 0; }
+    .field-wrap { margin-top: 26px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); background: var(--wash); }
+    #field { display: block; width: 100%; height: auto; }
+    .verdict-line { font-size: clamp(20px, 2.4vw, 27px); line-height: 1.3; margin: 18px 0 0; max-width: 46rem; }
+    .verdict-line .m { font-family: var(--font-technical); font-size: .72em; color: var(--sanguine); letter-spacing: .02em; }
 
-    .register { margin-top: 46px; border-top: 1px solid var(--hairline); }
+    .chart { margin-top: 30px; border-top: 1px solid var(--hairline); }
+    .crow {
+      display: grid;
+      grid-template-columns: 158px minmax(0, 1fr) 118px;
+      gap: 12px; align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--ghost);
+    }
+    .crow .cname { font: 500 11px/1.3 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; }
+    .crow .cname a { text-decoration: none; }
+    .crow .cbar { height: 18px; position: relative; min-width: 0; }
+    .crow .cbar i { display: block; height: 100%; background: var(--sanguine); min-width: 2px; }
+    .crow .cval { font: 11px/1.3 var(--font-technical); color: var(--ink-soft); text-align: right; }
+
+    .mults { margin-top: 30px; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 1px solid var(--hairline); border-left: 1px solid var(--hairline); }
+    .mult { border-right: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); padding: 14px 14px 12px; min-width: 0; }
+    .mult .mname { font: 500 10px/1.3 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; margin: 0 0 8px; }
+    .mult .mname a { text-decoration: none; }
+    .wbars { display: flex; align-items: flex-end; gap: 3px; height: 44px; }
+    .wbars i { flex: 1 1 0; background: var(--sanguine); min-width: 0; }
+    .mult .mtotal { font: 10px/1.4 var(--font-technical); color: var(--ink-soft); margin: 8px 0 0; }
+    .mult .mtotal b { color: var(--sanguine); font-weight: 500; }
+
+    .register { margin-top: 40px; border-top: 1px solid var(--hairline); }
     .entry { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--hairline); }
-    .entry-no { font-size: 11px; padding-top: 6px; }
-    .entry[data-state="underdrawing"] .entry-no { color: var(--graphite); }
-    .entry[data-state="working"] .entry-no { color: var(--sanguine); }
-    .entry[data-state="committed"] .entry-no { color: var(--ink); }
+    .entry-no { font: 11px/1.4 var(--font-technical); letter-spacing: .055em; padding-top: 6px; color: var(--ink-soft); }
     .entry h3 { margin: 0 0 6px; }
     .entry h3 a { text-decoration-thickness: 1px; }
     .verdict { font-size: 21px; line-height: 1.3; margin: 0 0 10px; max-width: 44rem; }
-    .entry-meta { font: 10px/1.6 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
-    .entry-meta .st-working { color: var(--sanguine); }
-    .entry-meta .st-committed { color: var(--ink); }
+    .entry-meta { font: 10px/1.6 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .entry-meta svg { display: block; }
     .entry details { margin-top: 12px; }
     .entry summary { cursor: pointer; font: 500 11px/1 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--ink-soft); display: inline-block; padding: 8px 0; }
     .entry summary:hover { color: var(--sanguine); }
@@ -209,32 +197,33 @@
     .visit { display: inline-block; margin-top: 10px; font: 500 11px/1 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; border: 1px solid var(--hairline); padding: 10px 14px; text-decoration: none; }
     .visit:hover { border-color: var(--sanguine); color: var(--sanguine); }
 
+    .rev { max-width: 46rem; font-size: 20px; line-height: 1.4; }
+    .rev .rev-date { font: 11px/1.4 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--sanguine); display: block; margin-bottom: 10px; }
+    .rev s { color: var(--ink-soft); text-decoration-color: var(--sanguine); }
+
     .source-list { list-style: none; padding: 0; margin: 38px 0 0; }
     .source-list li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-top: 1px solid var(--hairline); font-size: 15px; line-height: 1.38; }
-    .src-no { font-size: 10px; color: var(--sanguine); padding-top: 4px; }
+    .src-no { font: 10px/1.4 var(--font-technical); letter-spacing: .055em; color: var(--sanguine); padding-top: 4px; }
     .source-list a { overflow-wrap: anywhere; }
-    .source-list span { color: var(--ink-soft); display: block; }
+    .source-list .snote { color: var(--ink-soft); display: block; font-size: 13px; }
 
     .final-mark { padding-top: 54px; display: flex; justify-content: space-between; align-items: end; gap: 24px; color: var(--ink-soft); font-size: 14px; }
     .final-mark strong { color: var(--ink); font-size: 20px; font-weight: 520; }
     .folio-id { font: 10px/1.4 var(--font-technical); text-transform: uppercase; letter-spacing: .06em; text-align: right; }
 
-    #leaders { position: absolute; inset: 0; pointer-events: none; }
-    #leaders line { stroke: var(--sanguine); stroke-width: 1; }
-
     @media (max-width: 760px) {
       body { font-size: 18px; }
       .folio { padding: 22px 18px 70px 24px; }
-      .opening { padding: 58px 0 44px; }
+      .opening { min-height: 0; padding: 58px 0 44px; }
       h1 { font-size: clamp(50px, 16vw, 76px); max-width: 8ch; }
       .thesis { font-size: 21px; }
       .contents { columns: 2; column-gap: 18px; }
       .section { padding: 56px 0; }
+      .crow { grid-template-columns: 104px minmax(0, 1fr) 64px; gap: 8px; }
+      .mults { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .entry { grid-template-columns: 1fr; gap: 8px; }
-      .cross-note { position: static; width: auto; margin: 14px 0 0; }
       .final-mark { align-items: start; flex-direction: column; }
       .folio-id { text-align: left; }
-      #leaders { display: none; }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -245,163 +234,63 @@
 <body>
 <div class="folio">
   <header class="opening">
-    <div>
-      <p class="stamp">Folio 00 / Collected works</p>
-      <h1>The <em>Index</em> Folio.</h1>
-      <p class="thesis">The collected work of C. Dillinger: instruments, labs, and services.</p>
-      <ol class="contents">
-        <li><a href="#sheet">01 · The sheet</a></li>
-        <li><a href="#register">02 · The register</a></li>
-        <li><a href="#provenance">03 · Provenance</a></li>
-      </ol>
-    </div>
+    <p class="stamp">Folio 00 / Collected works</p>
+    <h1>The <em>Index</em> Folio.</h1>
+    <p class="thesis">The collected work of C. Dillinger: instruments, labs, and services.</p>
+    <ol class="contents">
+      <li><a href="#field-s">01 · The field</a></li>
+      <li><a href="#measure">02 · The measure</a></li>
+      <li><a href="#weeks">03 · Twelve weeks</a></li>
+      <li><a href="#register-s">04 · The register</a></li>
+      <li><a href="#revision">05 · Revision</a></li>
+      <li><a href="#provenance">06 · Provenance</a></li>
+    </ol>
   </header>
 
-  <section class="section" id="sheet">
-    <p class="kicker">01 · The sheet</p>
-    <h2>Nine sites, three states.</h2>
-    <p class="control-label">Order the sheet by</p>
-    <div class="control-row" role="group" aria-label="Ordering">
-      <button class="control" data-order="folio" aria-pressed="true">Folio order</button>
-      <button class="control" data-order="state" aria-pressed="false">By state</button>
-      <button class="control" data-order="intent" aria-pressed="false">By intent</button>
+  <section class="section" id="field-s">
+    <p class="kicker">01 · The field</p>
+    <h2>Weight follows updates.</h2>
+    <p class="control-label">Emphasis</p>
+    <div class="control-row" role="group" aria-label="Emphasis premise">
+      <button class="control" data-premise="activity" aria-pressed="true">Update activity</button>
+      <button class="control" data-premise="recency" aria-pressed="false">Last push</button>
+      <button class="control" data-premise="folio" aria-pressed="false">Folio order</button>
     </div>
-    <p class="control-label">Show one state at a time</p>
-    <div class="control-row" role="group" aria-label="State filter">
-      <button class="control" data-focus="all" aria-pressed="true">All</button>
-      <button class="control" data-focus="underdrawing" aria-pressed="false">Reserved</button>
-      <button class="control" data-focus="working" aria-pressed="false">In revision</button>
-      <button class="control" data-focus="committed" aria-pressed="false">Settled</button>
+    <div class="field-wrap">
+      <svg id="field" viewBox="0 0 680 440" role="img" aria-label="Diagram of the nine sites. The most updated sites sit nearest the center, drawn darkest and largest."></svg>
     </div>
-    <div class="sheet" id="sheetEl" data-focus="all">
-      <svg id="leaders" aria-hidden="true"></svg>
-      <div id="bands"></div>
-      <aside class="cross-note" data-lyr="working" id="noteA">New benches graduate into portfolio proof cards. The lab feeds the record.</aside>
-    </div>
-    <p class="readout" id="readout" aria-live="polite">folio order · 9 sites + 1 reserved</p>
+    <p class="verdict-line" id="verdictLine" aria-live="polite"></p>
   </section>
 
-  <section class="section" id="register">
-    <p class="kicker">02 · The register</p>
+  <section class="section" id="measure">
+    <p class="kicker">02 · The measure</p>
+    <h2 id="measureH">Commits, last 28 days.</h2>
+    <div class="chart" id="chart"></div>
+  </section>
+
+  <section class="section" id="weeks">
+    <p class="kicker">03 · Twelve weeks</p>
+    <h2>Twelve weeks.</h2>
+    <div class="mults" id="mults"></div>
+  </section>
+
+  <section class="section" id="register-s">
+    <p class="kicker">04 · The register</p>
     <h2>Why each site deserves your visit.</h2>
-    <div class="register" id="registerEl">
+    <div class="register" id="register"></div>
+  </section>
 
-      <article class="entry" data-folio="01" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="Portfolio" data-url="https://dillingerstaffing.github.io/portfolio/" data-measure="185 proof cards · 34 articles">
-        <span class="entry-no">01</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/portfolio/">Portfolio</a></h3>
-          <p class="verdict">Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · 185 proof cards · 34 articles · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> proof cards across five layers (ISA, microarch, firmware, kernel, algorithm), a blog that teaches one atomic idea per post, and a curated reading wire. <strong>For:</strong> hiring managers and engineers vetting a systems freelancer. New Proving Ground benches graduate into portfolio proof cards.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/portfolio/">Visit the portfolio</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="02" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Proving Ground" data-url="https://dillingerstaffing.github.io/proving-ground/" data-measure="70 benches">
-        <span class="entry-no">02</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/proving-ground/">Proving Ground</a></h3>
-          <p class="verdict">Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · 70 benches · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> seventy interactive benches across computer architecture, analog and power electronics, and bench craft, one per day. <strong>For:</strong> engineers building intuition they can verify.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/proving-ground/">Visit the proving ground</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="03" data-state="committed" data-intent="learn" data-revised="2026-09-17" data-name="Notebook" data-url="https://dillingerstaffing.github.io/notebook/" data-measure="10 sections · 31 sources">
-        <span class="entry-no">03</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/notebook/">Notebook</a></h3>
-          <p class="verdict">Come to read a working notebook's design language: material grammar, composition, and built examples, sourced to Leonardo, Tufte, and Distill.</p>
-          <p class="entry-meta"><span class="st-committed">Settled</span> · 10 sections · 31 sources · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> the complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit. <strong>For:</strong> designers and builders who want the method, not the costume.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/notebook/">Visit the notebook</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="04" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="GHOSTLIGHT" data-url="https://dillingerstaffing.github.io/ghostlight/" data-measure="10 walkthroughs · MITRE TA0005">
-        <span class="entry-no">04</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/ghostlight/">GHOSTLIGHT</a></h3>
-          <p class="verdict">Come to study stealth technique by technique: every walkthrough ships a red demo and a blue demo, so you learn the attack and the detection together.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · 10 walkthroughs · MITRE TA0005 · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&amp;CK TA0005 and D3FEND defenders. <strong>For:</strong> defenders and the curious, studied safely in the lab.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/ghostlight/">Visit ghostlight</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="05" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="Wigmore" data-url="https://dillingerstaffing.github.io/wigmore/" data-measure="shareable evidence charts">
-        <span class="entry-no">05</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/wigmore/">Wigmore</a></h3>
-          <p class="verdict">Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.</p>
-          <p class="entry-meta"><span class="st-committed">Settled</span> · shareable evidence charts · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection. <strong>For:</strong> anyone who wants to reason in public.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/wigmore/">Visit wigmore</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="06" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="OLD IRON" data-url="https://dillingerstaffing.github.io/old-iron/" data-measure="NIST 800-88 wiping">
-        <span class="entry-no">06</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/old-iron/">OLD IRON</a></h3>
-          <p class="verdict">Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · NIST 800-88 wiping · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a terse service page: what is picked up, how wiping is certified per serial, how logistics are insured. <strong>For:</strong> teams retiring hardware honestly.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/old-iron/">Visit old iron</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="07" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="TAPEOUT" data-url="https://dillingerstaffing.github.io/tapeout/" data-measure="quote-based · burn-in tested">
-        <span class="entry-no">07</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/tapeout/">TAPEOUT</a></h3>
-          <p class="verdict">Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&amp;D log that claims no tapeout.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · quote-based · burn-in tested · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a lean distribution page with no fake inventory, plus an open lab log of real progress. <strong>For:</strong> buyers of GPUs and compute parts.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/tapeout/">Visit tapeout</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="08" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="UNSTUCK" data-url="https://dillingerstaffing.github.io/unstuck/" data-measure="plain-words fixes">
-        <span class="entry-no">08</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/unstuck/">UNSTUCK</a></h3>
-          <p class="verdict">Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.</p>
-          <p class="entry-meta"><span class="st-committed">Settled</span> · plain-words fixes · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a one-page card: a plain-language fix list, a three-step process, tap-to-call. <strong>For:</strong> non-technical users who want help without jargon.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/unstuck/">Visit unstuck</a>
-        </div>
-      </article>
-
-      <article class="entry" data-folio="09" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Signs" data-url="https://dillingerstaffing.github.io/signs/" data-measure="10 sign classes">
-        <span class="entry-no">09</span>
-        <div>
-          <h3><a href="https://dillingerstaffing.github.io/signs/">Signs</a></h3>
-          <p class="verdict">Come to watch text turn into semiotics: an experiment that classifies writing into Peirce's ten sign classes.</p>
-          <p class="entry-meta"><span class="st-working">In revision</span> · 10 sign classes · checked 2026-09-17</p>
-          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> an experimental text-to-semiotics instrument using Peirce's own terms throughout. <strong>For:</strong> the curious.</div></details>
-          <a class="visit" href="https://dillingerstaffing.github.io/signs/">Visit signs</a>
-        </div>
-      </article>
-
-    </div>
+  <section class="section" id="revision">
+    <p class="kicker">05 · Revision</p>
+    <h2>Revision.</h2>
+    <p class="rev"><span class="rev-date">2026-09-18</span><s>Quiet sites were labeled settled and kept.</s> Emphasis now follows measured update activity. A quiet site is de-emphasized, not settled.</p>
   </section>
 
   <section class="section" id="provenance">
-    <p class="kicker">03 · Provenance</p>
+    <p class="kicker">06 · Provenance</p>
     <h2>Provenance.</h2>
-    <ul class="source-list">
-      <li><span class="src-no">01</span><div><a href="https://dillingerstaffing.github.io/portfolio/">dillingerstaffing.github.io/portfolio/</a></div></li>
-      <li><span class="src-no">02</span><div><a href="https://dillingerstaffing.github.io/proving-ground/">dillingerstaffing.github.io/proving-ground/</a></div></li>
-      <li><span class="src-no">03</span><div><a href="https://dillingerstaffing.github.io/notebook/">dillingerstaffing.github.io/notebook/</a></div></li>
-      <li><span class="src-no">04</span><div><a href="https://dillingerstaffing.github.io/ghostlight/">dillingerstaffing.github.io/ghostlight/</a></div></li>
-      <li><span class="src-no">05</span><div><a href="https://dillingerstaffing.github.io/wigmore/">dillingerstaffing.github.io/wigmore/</a></div></li>
-      <li><span class="src-no">06</span><div><a href="https://dillingerstaffing.github.io/old-iron/">dillingerstaffing.github.io/old-iron/</a></div></li>
-      <li><span class="src-no">07</span><div><a href="https://dillingerstaffing.github.io/tapeout/">dillingerstaffing.github.io/tapeout/</a></div></li>
-      <li><span class="src-no">08</span><div><a href="https://dillingerstaffing.github.io/unstuck/">dillingerstaffing.github.io/unstuck/</a></div></li>
-      <li><span class="src-no">09</span><div><a href="https://dillingerstaffing.github.io/signs/">dillingerstaffing.github.io/signs/</a></div></li>
-    </ul>
+    <p class="quiet" style="max-width:46rem">Commit counts: github.com/dillingerstaffing repository statistics, measured 2026-09-18. Push times UTC.</p>
+    <ul class="source-list" id="sourceList"></ul>
   </section>
 
   <footer class="final-mark">
@@ -412,134 +301,217 @@
 <script>
 (function () {
   "use strict";
-  var registerEl = document.getElementById('registerEl');
-  var bandsEl = document.getElementById('bands');
-  var sheetEl = document.getElementById('sheetEl');
-  var readout = document.getElementById('readout');
-  var leaders = document.getElementById('leaders');
-  var noteA = document.getElementById('noteA');
+  var DATA_DATE = Date.parse('2026-09-18T00:30:00Z');
+  var MAXW = 242;
 
-  var entries = Array.prototype.slice.call(registerEl.querySelectorAll('.entry')).map(function (el) {
-    return {
-      el: el,
-      folio: el.getAttribute('data-folio'),
-      state: el.getAttribute('data-state'),
-      intent: el.getAttribute('data-intent'),
-      name: el.getAttribute('data-name'),
-      url: el.getAttribute('data-url')
-    };
+  var SITES = [
+    { folio: '01', name: 'Portfolio', slug: 'portfolio', url: 'https://dillingerstaffing.github.io/portfolio/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,148,242], pushed: '2026-09-17T21:37:25Z',
+      verdict: 'Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.',
+      evidence: 'Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.' },
+    { folio: '02', name: 'Proving Ground', slug: 'proving-ground', url: 'https://dillingerstaffing.github.io/proving-ground/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,60,134], pushed: '2026-09-17T22:17:03Z',
+      verdict: 'Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.',
+      evidence: 'Seventy interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.' },
+    { folio: '03', name: 'Notebook', slug: 'notebook', url: 'https://dillingerstaffing.github.io/notebook/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,2], pushed: '2026-09-18T00:08:32Z',
+      verdict: "Come to read a working notebook's design language: material grammar, composition, and built examples, sourced to Leonardo, Tufte, and Distill.",
+      evidence: 'The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.' },
+    { folio: '04', name: 'GHOSTLIGHT', slug: 'ghostlight', url: 'https://dillingerstaffing.github.io/ghostlight/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,40], pushed: '2026-09-17T19:47:38Z',
+      verdict: 'Come to study stealth technique by technique: every walkthrough ships a red demo and a blue demo, so you learn the attack and the detection together.',
+      evidence: 'Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.' },
+    { folio: '05', name: 'Wigmore', slug: 'wigmore', url: 'https://dillingerstaffing.github.io/wigmore/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,32], pushed: '2026-09-17T01:27:24Z',
+      verdict: 'Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.',
+      evidence: 'A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.' },
+    { folio: '06', name: 'OLD IRON', slug: 'old-iron', url: 'https://dillingerstaffing.github.io/old-iron/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,51,84], pushed: '2026-09-17T22:56:38Z',
+      verdict: 'Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.',
+      evidence: 'A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.' },
+    { folio: '07', name: 'TAPEOUT', slug: 'tapeout', url: 'https://dillingerstaffing.github.io/tapeout/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,55,87], pushed: '2026-09-17T22:55:34Z',
+      verdict: 'Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&D log that claims no tapeout.',
+      evidence: 'A lean distribution page with no fake inventory, plus an open lab log of real progress.' },
+    { folio: '08', name: 'UNSTUCK', slug: 'unstuck', url: 'https://dillingerstaffing.github.io/unstuck/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,24], pushed: '2026-09-17T12:09:33Z',
+      verdict: 'Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.',
+      evidence: 'A one-page card: a plain-language fix list, a three-step process, tap-to-call.' },
+    { folio: '09', name: 'Signs', slug: 'signs', url: 'https://dillingerstaffing.github.io/signs/',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,25], pushed: '2026-09-17T01:27:14Z',
+      verdict: "Come to watch text turn into semiotics: an experiment that classifies writing into Peirce's ten sign classes.",
+      evidence: "An experimental text-to-semiotics instrument using Peirce's own terms throughout." }
+  ];
+
+  SITES.forEach(function (s) {
+    s.c28 = s.weekly.slice(-4).reduce(function (a, b) { return a + b; }, 0);
+    s.hoursAgo = (DATA_DATE - Date.parse(s.pushed)) / 3600000;
+    s.pushDay = s.pushed.slice(0, 10);
   });
+  var MAXC = Math.max.apply(null, SITES.map(function (s) { return s.c28; }));
+  var MAXH = Math.max.apply(null, SITES.map(function (s) { return s.hoursAgo; }));
 
-  var INTENT_ORDER = { learn: 0, use: 1, engage: 2 };
-  var INTENT_LABEL = { learn: 'Learn', use: 'Use', engage: 'Engage' };
-  var INTENT_SUB = {
-    learn: 'Come to understand something.',
-    use: 'Come to do something.',
-    engage: 'Come to hire, to buy, or to retire hardware.'
-  };
-  var STATE_SUB = {
-    committed: 'Settled and kept.',
-    working: 'Under active revision.',
-    underdrawing: 'Reserved. The next site earns its block.'
-  };
+  var premise = 'activity';
+  var field = document.getElementById('field');
+  var verdictLine = document.getElementById('verdictLine');
+  var chartEl = document.getElementById('chart');
+  var multsEl = document.getElementById('mults');
+  var registerEl = document.getElementById('register');
+  var measureH = document.getElementById('measureH');
 
-  var premise = 'folio';
-
-  function blockHTML(s) {
-    return '<a class="folio-block" data-state="' + s.state + '" data-lyr="' + s.state + '" href="' + s.url + '">' +
-      '<span class="entry-no">' + s.folio + '</span>' +
-      '<span class="entry-name">' + s.name + '</span></a>';
-  }
-  function reservedHTML() {
-    return '<div class="folio-block" data-state="underdrawing" data-lyr="underdrawing" aria-label="Folio 10, reserved">' +
-      '<span class="entry-no">10</span><span class="entry-name" style="font-weight:400">Reserved</span></div>';
-  }
-  function band(label, cls, sub, inner) {
-    return '<div class="register-band"><p class="band-label ' + cls + '" data-lyr="' + cls + '">' + label + '</p>' +
-      '<p class="band-sub">' + sub + '</p><div class="folio-row">' + inner + '</div></div>';
+  function ordered() {
+    var a = SITES.slice();
+    if (premise === 'activity') a.sort(function (x, y) { return y.c28 - x.c28; });
+    else if (premise === 'recency') a.sort(function (x, y) { return x.hoursAgo - y.hoursAgo; });
+    else a.sort(function (x, y) { return x.folio < y.folio ? -1 : 1; });
+    return a;
   }
 
-  function renderBands() {
-    var html = '';
-    var sorted = entries.slice();
-    if (premise === 'folio') {
-      sorted.sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-      html += band('Folio 01-09', 'commit', 'Reading order.', sorted.map(blockHTML).join(''));
-      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'folio order · 9 sites + 1 reserved';
-    } else if (premise === 'state') {
-      ['committed', 'working'].forEach(function (st) {
-        var items = sorted.filter(function (s) { return s.state === st; })
-          .sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-        var lbl = st === 'committed' ? 'Settled' : 'In revision';
-        html += band(lbl + ' / ' + items.length, st === 'committed' ? 'commit' : 'work', STATE_SUB[st],
-          items.map(blockHTML).join(''));
-      });
-      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'by state · 3 settled · 6 in revision · 1 reserved';
+  function nodeR(s) {
+    if (premise === 'activity') return 5 + 13 * Math.sqrt(s.c28 / MAXC);
+    if (premise === 'recency') return 5 + 13 * (1 - s.hoursAgo / MAXH);
+    return 9;
+  }
+
+  function renderField() {
+    var CX = 340, CY = 218;
+    var order = ordered();
+    var out = '';
+    [70, 140, 205].forEach(function (r) {
+      out += '<circle cx="' + CX + '" cy="' + CY + '" r="' + r + '" fill="none" stroke="var(--graphite)" stroke-width="1" opacity="0.45"/>';
+    });
+    out += '<line x1="' + (CX - 225) + '" y1="' + CY + '" x2="' + (CX + 225) + '" y2="' + CY + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
+    out += '<line x1="' + CX + '" y1="' + (CY - 205) + '" x2="' + CX + '" y2="' + (CY + 205) + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
+    var centerWord = premise === 'activity' ? 'MOST UPDATED' : premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-09';
+    out += '<text x="' + CX + '" y="' + (CY + 4) + '" text-anchor="middle" font-family="var(--font-technical)" font-size="9" letter-spacing="0.08em" fill="var(--graphite)">' + centerWord + '</text>';
+    order.forEach(function (s, i) {
+      var ang = (-90 + i * 137.5) * Math.PI / 180;
+      var rr = 36 + i * (168 / 8);
+      var x = CX + rr * Math.cos(ang), y = CY + rr * Math.sin(ang);
+      var nr = nodeR(s);
+      var style;
+      if (premise === 'folio') style = 'fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"';
+      else if (i < 3) style = 'fill="var(--ink)"';
+      else if (i < 6) style = 'fill="var(--sanguine)"';
+      else style = 'fill="none" stroke="var(--graphite)" stroke-width="1.5" stroke-dasharray="4 3"';
+      var lx = CX + (rr + nr + 16) * Math.cos(ang), ly = CY + (rr + nr + 16) * Math.sin(ang);
+      var cos = Math.cos(ang);
+      var anchor = cos > 0.25 ? 'start' : cos < -0.25 ? 'end' : 'middle';
+      var lfill = (premise !== 'folio' && i >= 6) ? 'var(--graphite)' : 'var(--ink)';
+      out += '<line x1="' + (x + Math.cos(ang) * nr).toFixed(1) + '" y1="' + (y + Math.sin(ang) * nr).toFixed(1) +
+        '" x2="' + lx.toFixed(1) + '" y2="' + ly.toFixed(1) + '" stroke="var(--sanguine)" stroke-width="1" opacity="0.75"/>';
+      out += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + nr.toFixed(1) + '" ' + style + '/>';
+      out += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 3.5).toFixed(1) + '" text-anchor="' + anchor +
+        '" font-family="var(--font-technical)" font-size="10.5" letter-spacing="0.06em" fill="' + lfill + '">' +
+        s.name.toUpperCase() + '</text>';
+    });
+    field.innerHTML = out;
+  }
+
+  function renderVerdict() {
+    var top = ordered()[0];
+    if (premise === 'activity') {
+      verdictLine.innerHTML = top.name + ' carries the most weight: <span class="m">' + top.c28 + ' commits in the last 28 days.</span>';
+    } else if (premise === 'recency') {
+      var p = top.pushed.slice(0, 16).replace('T', ' ');
+      verdictLine.innerHTML = top.name + ' was touched most recently: <span class="m">pushed ' + p + ' UTC.</span>';
     } else {
-      ['learn', 'use', 'engage'].forEach(function (in_) {
-        var items = sorted.filter(function (s) { return s.intent === in_; })
-          .sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-        html += band(INTENT_LABEL[in_] + ' / ' + items.length, in_ === 'learn' ? 'commit' : 'work', INTENT_SUB[in_],
-          items.map(blockHTML).join(''));
-      });
-      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'by intent · 4 learn · 2 use · 3 engage · 1 reserved';
+      verdictLine.innerHTML = 'Folio order: <span class="m">nine sites, 01 to 09.</span>';
     }
-    bandsEl.innerHTML = html;
-    reorderRegister();
-    drawLeaders();
   }
 
-  function reorderRegister() {
-    var sorted = entries.slice();
-    if (premise === 'folio') sorted.sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-    else if (premise === 'state') sorted.sort(function (a, b) {
-      var o = { committed: 0, working: 1 };
-      return (o[a.state] - o[b.state]) || (a.folio < b.folio ? -1 : 1);
+  function renderChart() {
+    var order = ordered();
+    var html = '';
+    order.forEach(function (s) {
+      var val, label, pct;
+      if (premise === 'recency') {
+        val = s.hoursAgo; label = val.toFixed(1) + ' h'; pct = (val / MAXH) * 100;
+      } else {
+        val = s.c28; label = val + ' commits'; pct = (val / MAXC) * 100;
+      }
+      html += '<div class="crow"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
+        '<span class="cbar"><i style="width:' + Math.max(pct, 0.6).toFixed(1) + '%"></i></span>' +
+        '<span class="cval">' + label + '</span></div>';
     });
-    else sorted.sort(function (a, b) { return (INTENT_ORDER[a.intent] - INTENT_ORDER[b.intent]) || (a.folio < b.folio ? -1 : 1); });
-    sorted.forEach(function (s) { registerEl.appendChild(s.el); });
+    chartEl.innerHTML = html;
+    measureH.textContent = premise === 'recency' ? 'Hours since last push.' : 'Commits, last 28 days.';
   }
 
-  function drawLeaders() {
-    if (window.innerWidth <= 760) { leaders.innerHTML = ''; return; }
-    var sheetR = sheetEl.getBoundingClientRect();
-    leaders.setAttribute('width', sheetR.width);
-    leaders.setAttribute('height', sheetR.height);
-    var target = bandsEl.querySelector('.folio-block[href*="proving-ground"]');
-    if (!noteA || !target) { leaders.innerHTML = ''; return; }
-    var n = noteA.getBoundingClientRect(), t = target.getBoundingClientRect();
-    var x1 = n.left - sheetR.left + 4, y1 = n.bottom - sheetR.top + 10;
-    var x2 = t.left - sheetR.left + t.width / 2, y2 = t.top - sheetR.top;
-    leaders.innerHTML = '<line x1="' + x1 + '" y1="' + y1 + '" x2="' + x2 + '" y2="' + y2 + '"/>' +
-      '<circle cx="' + x2 + '" cy="' + y2 + '" r="2.5" fill="var(--sanguine)"/>';
-  }
-
-  function setPressed(group, btn) {
-    Array.prototype.forEach.call(group.querySelectorAll('.control'), function (b) {
-      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+  function weekBars(s, W, H) {
+    var bw = W / 12, out = '';
+    s.weekly.forEach(function (v, i) {
+      var h = Math.max((v / MAXW) * (H - 4), v > 0 ? 1.5 : 0);
+      out += '<rect x="' + (i * bw + 1).toFixed(1) + '" y="' + (H - h).toFixed(1) + '" width="' + (bw - 2).toFixed(1) +
+        '" height="' + h.toFixed(1) + '" fill="var(--sanguine)"/>';
     });
+    return out;
   }
 
-  document.querySelectorAll('[data-order]').forEach(function (btn) {
+  function renderMults() {
+    var html = '';
+    ordered().forEach(function (s) {
+      var bars = '';
+      s.weekly.forEach(function (v) {
+        var h = v > 0 ? Math.max((v / MAXW) * 100, 5) : 0;
+        bars += '<i style="height:' + h.toFixed(1) + '%"></i>';
+      });
+      html += '<div class="mult"><p class="mname"><a href="' + s.url + '">' + s.name + '</a></p>' +
+        '<div class="wbars" role="img" aria-label="' + s.name + ', weekly commits">' + bars + '</div>' +
+        '<p class="mtotal"><b>' + s.c28 + '</b> commits / 28 days</p></div>';
+    });
+    multsEl.innerHTML = html;
+  }
+
+  function spark(s) {
+    return '<svg width="84" height="20" viewBox="0 0 84 20" role="img" aria-label="' + s.c28 + ' commits in 28 days">' +
+      weekBars(s, 84, 20).replace(/var\(--sanguine\)/g, 'var(--ink-soft)') + '</svg>';
+  }
+
+  function renderRegister() {
+    var html = '';
+    ordered().forEach(function (s) {
+      html += '<article class="entry"><span class="entry-no">' + s.folio + '</span><div>' +
+        '<h3><a href="' + s.url + '">' + s.name + '</a></h3>' +
+        '<p class="verdict">' + s.verdict + '</p>' +
+        '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days \u00B7 pushed ' + s.pushDay + '</span></p>' +
+        '<details><summary>More</summary><div class="evidence-body">' + s.evidence + '</div></details>' +
+        '<a class="visit" href="' + s.url + '">Visit ' + s.name.toLowerCase() + '</a>' +
+        '</div></article>';
+    });
+    registerEl.innerHTML = html;
+  }
+
+  function renderSources() {
+    var html = '';
+    SITES.slice().sort(function (a, b) { return a.folio < b.folio ? -1 : 1; }).forEach(function (s) {
+      html += '<li><span class="src-no">' + s.folio + '</span><div>' +
+        '<a href="https://github.com/dillingerstaffing/' + s.slug + '">github.com/dillingerstaffing/' + s.slug + '</a>' +
+        '<span class="snote">' + s.c28 + ' commits in 28 days \u00B7 pushed ' + s.pushDay + '</span></div></li>';
+    });
+    document.getElementById('sourceList').innerHTML = html;
+  }
+
+  function renderAll() {
+    renderField();
+    renderVerdict();
+    renderChart();
+    renderMults();
+    renderRegister();
+  }
+
+  document.querySelectorAll('[data-premise]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      premise = btn.getAttribute('data-order');
-      setPressed(btn.parentElement, btn);
-      renderBands();
+      premise = btn.getAttribute('data-premise');
+      document.querySelectorAll('[data-premise]').forEach(function (b) {
+        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+      });
+      renderAll();
     });
   });
-  document.querySelectorAll('[data-focus]').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      sheetEl.setAttribute('data-focus', btn.getAttribute('data-focus'));
-      setPressed(btn.parentElement, btn);
-    });
-  });
 
-  window.addEventListener('resize', drawLeaders);
-  window.addEventListener('load', function () { drawLeaders(); });
-  renderBands();
+  renderSources();
+  renderAll();
 })();
 </script>
 </body>
