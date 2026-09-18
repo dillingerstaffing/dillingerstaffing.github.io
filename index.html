@@ -188,7 +188,7 @@
     .entry h3 a { text-decoration-thickness: 1px; }
     .verdict { font-size: 21px; line-height: 1.3; margin: 0 0 10px; max-width: 44rem; }
     .entry-meta { font: 10px/1.6 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .entry-meta svg { display: block; }
+    .entry-meta svg { display: block; transform: translateY(1px); }
     .entry details { margin-top: 12px; }
     .entry summary { cursor: pointer; font: 500 11px/1 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--ink-soft); display: inline-block; padding: 8px 0; }
     .entry summary:hover { color: var(--sanguine); }
@@ -301,20 +301,20 @@
 <script>
 (function () {
   "use strict";
-  var DATA_DATE = Date.parse('2026-09-18T00:30:00Z');
-  var MAXW = 242;
+  var DATA_DATE = Date.parse('2026-09-18T08:09:18Z');
+  var MAXW = 195;
 
   var SITES = [
     { folio: '01', name: 'Portfolio', slug: 'portfolio', url: 'https://dillingerstaffing.github.io/portfolio/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,148,242], pushed: '2026-09-17T21:37:25Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,195,195], pushed: '2026-09-17T21:37:25Z',
       verdict: 'Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.',
       evidence: 'Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.' },
     { folio: '02', name: 'Proving Ground', slug: 'proving-ground', url: 'https://dillingerstaffing.github.io/proving-ground/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,60,134], pushed: '2026-09-17T22:17:03Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,82,112], pushed: '2026-09-17T22:17:03Z',
       verdict: 'Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.',
-      evidence: 'Seventy interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.' },
+      evidence: 'Seventy-one interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.' },
     { folio: '03', name: 'Notebook', slug: 'notebook', url: 'https://dillingerstaffing.github.io/notebook/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,0,2], pushed: '2026-09-18T00:08:32Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,3], pushed: '2026-09-18T00:08:32Z',
       verdict: "Come to read a working notebook's design language: material grammar, composition, and built examples, sourced to Leonardo, Tufte, and Distill.",
       evidence: 'The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.' },
     { folio: '04', name: 'GHOSTLIGHT', slug: 'ghostlight', url: 'https://dillingerstaffing.github.io/ghostlight/',
@@ -326,15 +326,15 @@
       verdict: 'Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.',
       evidence: 'A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.' },
     { folio: '06', name: 'OLD IRON', slug: 'old-iron', url: 'https://dillingerstaffing.github.io/old-iron/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,51,84], pushed: '2026-09-17T22:56:38Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,60,76], pushed: '2026-09-18T06:32:58Z',
       verdict: 'Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.',
       evidence: 'A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.' },
     { folio: '07', name: 'TAPEOUT', slug: 'tapeout', url: 'https://dillingerstaffing.github.io/tapeout/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,55,87], pushed: '2026-09-17T22:55:34Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,63,81], pushed: '2026-09-18T06:33:03Z',
       verdict: 'Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&D log that claims no tapeout.',
       evidence: 'A lean distribution page with no fake inventory, plus an open lab log of real progress.' },
     { folio: '08', name: 'UNSTUCK', slug: 'unstuck', url: 'https://dillingerstaffing.github.io/unstuck/',
-      weekly: [0,0,0,0,0,0,0,0,0,0,0,24], pushed: '2026-09-17T12:09:33Z',
+      weekly: [0,0,0,0,0,0,0,0,0,0,0,29], pushed: '2026-09-18T08:08:53Z',
       verdict: 'Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.',
       evidence: 'A one-page card: a plain-language fix list, a three-step process, tap-to-call.' },
     { folio: '09', name: 'Signs', slug: 'signs', url: 'https://dillingerstaffing.github.io/signs/',
@@ -426,9 +426,9 @@
     order.forEach(function (s) {
       var val, label, pct;
       if (premise === 'recency') {
-        val = s.hoursAgo; label = val.toFixed(1) + ' h'; pct = (val / MAXH) * 100;
+        val = s.hoursAgo; label = val.toFixed(1) + ' h'; pct = (1 - val / MAXH) * 100;
       } else {
-        val = s.c28; label = val + ' commits'; pct = (val / MAXC) * 100;
+        val = s.c28; label = '' + val; pct = (val / MAXC) * 100;
       }
       html += '<div class="crow"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
         '<span class="cbar"><i style="width:' + Math.max(pct, 0.6).toFixed(1) + '%"></i></span>' +
