@@ -11,29 +11,29 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <title>The Index Folio, Chris Dillinger</title>
-  <meta name="description" content="One folio indexing every working site: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language. Each entry states why it deserves your visit." />
+  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language. Each entry states why it deserves your visit." />
   <link rel="canonical" href="https://dillingerstaffing.github.io/" />
   <meta property="og:title" content="The Index Folio, Chris Dillinger" />
-  <meta property="og:description" content="Nine working sites on one sheet. Each entry argues, in one line, why it deserves your visit, with the evidence beside the claim. Set in the Notebook design language." />
+  <meta property="og:description" content="Nine working sites on one page. Each entry states, in a single line, why it deserves your visit." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dillingerstaffing.github.io/" />
   <meta property="og:image" content="https://dillingerstaffing.github.io/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit, on a warm paper sheet with ink and sanguine marks." />
+  <meta property="og:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit." />
   <meta property="og:site_name" content="The Index Folio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Index Folio, Chris Dillinger" />
-  <meta name="twitter:description" content="Nine working sites on one sheet. Each entry argues, in one line, why it deserves your visit, with the evidence beside the claim." />
+  <meta name="twitter:description" content="Nine working sites on one page. Each entry states, in a single line, why it deserves your visit." />
   <meta name="twitter:image" content="https://dillingerstaffing.github.io/og-image.png" />
-  <meta name="twitter:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit, on a warm paper sheet with ink and sanguine marks." />
+  <meta name="twitter:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "The Index Folio",
     "url": "https://dillingerstaffing.github.io/",
-    "description": "One folio indexing every working site by Chris Dillinger. Each entry states why it deserves a visit, with evidence beside the claim.",
+    "description": "One page indexing every working site by Chris Dillinger. Each entry states why it deserves a visit.",
     "author": { "@type": "Person", "name": "Chris Dillinger" },
     "inLanguage": "en"
   }
@@ -108,7 +108,7 @@
       background: var(--ghost);
       pointer-events: none;
     }
-    .stamp, .kicker, .entry-no, .readout, .ledger-no, .flow-code, .src-no {
+    .stamp, .kicker, .entry-no, .readout, .src-no {
       font-family: var(--font-technical);
       letter-spacing: .055em;
       text-transform: uppercase;
@@ -119,7 +119,7 @@
       grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
       gap: clamp(30px, 7vw, 100px);
       align-items: end;
-      min-height: min(72vh, 680px);
+      min-height: min(64vh, 620px);
       padding: 5vh 0 64px;
       border-bottom: 1px solid var(--hairline);
     }
@@ -138,23 +138,13 @@
     .contents li { padding: 5px 0; border-top: 1px solid var(--ghost); }
     .contents a { text-decoration: none; display: block; }
 
-    .section {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(220px, 300px);
-      gap: clamp(30px, 7vw, 100px);
-      padding: 78px 0;
-      border-bottom: 1px solid var(--hairline);
-    }
-    .section-main, .section-margin { min-width: 0; }
-    .section-margin { align-self: start; }
+    .section { padding: 78px 0; border-bottom: 1px solid var(--hairline); }
     .kicker { font-size: 11px; color: var(--sanguine); margin-bottom: 12px; }
     h2 { margin: 0 0 26px; font-size: clamp(35px, 5.2vw, 64px); line-height: .95; font-weight: 400; letter-spacing: -.035em; }
     h3 { font-size: 26px; line-height: 1.08; margin: 0 0 8px; font-weight: 520; }
     p { margin: 0 0 1em; }
     .lede { font-size: 24px; line-height: 1.32; max-width: 760px; }
     .quiet { color: var(--ink-soft); }
-    .aside-note { font-size: 15px; line-height: 1.45; color: var(--ink-soft); margin-bottom: 30px; padding-top: 11px; border-top: 1px solid var(--hairline); }
-    .aside-note strong { color: var(--ink); font-weight: 520; }
     .inline-series { display: inline-flex; width: 78px; height: 22px; vertical-align: -.38em; margin: 0 .28em; }
     .inline-series svg { width: 100%; height: 100%; }
 
@@ -209,7 +199,7 @@
     .readout { font-size: 11px; color: var(--sanguine); margin: 14px 0 0; }
 
     .register { margin-top: 46px; border-top: 1px solid var(--hairline); }
-    .entry { display: grid; grid-template-columns: 58px minmax(0, 1fr) minmax(200px, 260px); gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--hairline); }
+    .entry { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--hairline); }
     .entry-no { font-size: 11px; padding-top: 6px; }
     .entry[data-state="underdrawing"] .entry-no { color: var(--graphite); }
     .entry[data-state="working"] .entry-no { color: var(--sanguine); }
@@ -220,7 +210,6 @@
     .entry-meta { font: 10px/1.6 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); }
     .entry-meta .st-working { color: var(--sanguine); }
     .entry-meta .st-committed { color: var(--ink); }
-    .entry-meta .st-underdrawing { color: var(--graphite); }
     .entry details { margin-top: 12px; }
     .entry summary { cursor: pointer; font: 500 11px/1 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; color: var(--ink-soft); display: inline-block; padding: 8px 0; }
     .entry summary:hover { color: var(--sanguine); }
@@ -228,22 +217,6 @@
     .entry .evidence-body strong { color: var(--ink); font-weight: 520; }
     .visit { display: inline-block; margin-top: 10px; font: 500 11px/1 var(--font-technical); text-transform: uppercase; letter-spacing: .055em; border: 1px solid var(--hairline); padding: 10px 14px; text-decoration: none; }
     .visit:hover { border-color: var(--sanguine); color: var(--sanguine); }
-
-    .ledger { margin-top: 40px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-    .ledger-row { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 18px; padding: 16px 0; border-top: 1px solid var(--ghost); font-size: 16px; }
-    .ledger-row:first-child { border-top: 0; }
-    .ledger-no { font-size: 10px; color: var(--sanguine); padding-top: 5px; }
-    .ledger-old { color: var(--ink-soft); text-decoration: line-through; text-decoration-color: var(--sanguine); display: block; }
-    .ledger-new { display: block; margin-top: 4px; }
-
-    .flow { margin-top: 40px; border-top: 1px solid var(--hairline); border-bottom: 1px solid var(--hairline); }
-    .flow-row { display: grid; grid-template-columns: 82px minmax(0, 1fr) 34px; align-items: start; gap: 18px; padding: 20px 0; position: relative; }
-    .flow-row + .flow-row { border-top: 1px solid var(--ghost); }
-    .flow-code { font-size: 10px; color: var(--sanguine); text-transform: uppercase; }
-    .flow-copy strong { font-size: 22px; font-weight: 520; display: block; }
-    .flow-copy span { display: block; color: var(--ink-soft); font-size: 16px; margin-top: 2px; }
-    .flow-state { font: 15px/1 var(--font-technical); color: var(--sanguine); }
-    .flow-row::after { content: ""; position: absolute; left: 52px; top: 42px; width: 22px; border-top: 1px solid var(--sanguine); opacity: .65; }
 
     .source-list { list-style: none; padding: 0; margin: 38px 0 0; }
     .source-list li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 12px; padding: 14px 0; border-top: 1px solid var(--hairline); font-size: 15px; line-height: 1.38; }
@@ -261,7 +234,7 @@
     @media (max-width: 760px) {
       body { font-size: 18px; }
       .folio { padding: 22px 18px 70px 24px; }
-      .opening, .section { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+      .opening { grid-template-columns: minmax(0, 1fr); gap: 28px; }
       .opening { min-height: 0; padding: 58px 0 44px; }
       h1 { font-size: clamp(50px, 16vw, 76px); max-width: 8ch; }
       .thesis { font-size: 21px; }
@@ -269,12 +242,8 @@
       .margin-thesis::before { top: 11px; }
       .contents { columns: 2; column-gap: 18px; }
       .section { padding: 56px 0; }
-      .aside-note { margin: 0; }
       .entry { grid-template-columns: 1fr; gap: 8px; }
       .cross-note { position: static; width: auto; margin: 14px 0 0; }
-      .ledger-row { grid-template-columns: 1fr; gap: 4px; }
-      .flow-row { grid-template-columns: 62px minmax(0, 1fr) 24px; gap: 12px; }
-      .flow-row::after { left: 36px; width: 16px; }
       .final-mark { align-items: start; flex-direction: column; }
       .folio-id { text-align: left; }
       #leaders { display: none; }
@@ -291,231 +260,171 @@
     <div>
       <p class="stamp">Folio 00 / Collected works</p>
       <h1>The <em>Index</em> Folio.</h1>
-      <p class="thesis">Nine working sites on one sheet. Each entry argues, in a single line, why it deserves your visit, with the evidence beside the claim.</p>
+      <p class="thesis">Nine working sites on one sheet. Each entry states, in a single line, why it deserves your visit.</p>
       <ol class="contents">
-        <li><a href="#sheet">01 · The working sheet</a></li>
+        <li><a href="#sheet">01 · The sheet</a></li>
         <li><a href="#register">02 · The register</a></li>
-        <li><a href="#revision">03 · Revision</a></li>
-        <li><a href="#source">04 · Source</a></li>
+        <li><a href="#provenance">03 · Provenance</a></li>
       </ol>
     </div>
     <aside class="margin-thesis">
-      <strong>Why a folio, not a link list.</strong> A list asks nothing of the visitor. A folio states its conclusion first (start with the site that matches your question), keys each claim to its proof, and keeps its revisions visible. This page is the index demonstrating the language it indexes.
+      <strong>Why a folio, not a link list.</strong> A list asks nothing of the visitor. Every entry here argues for its visit, with the evidence beside the claim.
     </aside>
   </header>
 
   <section class="section" id="sheet">
-    <div class="section-main">
-      <p class="kicker">01 · The working sheet</p>
-      <h2>Every site, in three states of certainty.</h2>
-      <p class="lede">The language assigns graphic weight to the status of a thought, not color to a topic. Committed sites are settled and kept. Working sites are under active revision. Underdrawing holds the next folio, still allowed to be wrong. Nine sites
-        <span class="inline-series" role="img" aria-label="State mix: 6 working, 3 committed"><svg viewBox="0 0 78 22" aria-hidden="true"><g id="mix"></g></svg></span>
-        across three registers.</p>
-      <p class="control-label">Ordering premise, changes what the sheet compares</p>
-      <div class="control-row" role="group" aria-label="Ordering premise">
-        <button class="control" data-order="folio" aria-pressed="true">Folio order</button>
-        <button class="control" data-order="state" aria-pressed="false">By state</button>
-        <button class="control" data-order="intent" aria-pressed="false">By intent</button>
-      </div>
-      <p class="control-label">Commitment layer, isolates one state of certainty</p>
-      <div class="control-row" role="group" aria-label="Commitment layer">
-        <button class="control" data-focus="all" aria-pressed="true">All layers</button>
-        <button class="control" data-focus="underdrawing" aria-pressed="false">Underdrawing</button>
-        <button class="control" data-focus="working" aria-pressed="false">Working</button>
-        <button class="control" data-focus="committed" aria-pressed="false">Committed</button>
-      </div>
-      <div class="sheet" id="sheetEl" data-focus="all">
-        <svg id="leaders" aria-hidden="true"></svg>
-        <div id="bands"></div>
-        <aside class="cross-note" data-lyr="working" id="noteA">New benches graduate into portfolio proof cards. The lab feeds the record.</aside>
-        <aside class="cross-note" data-lyr="working" id="noteB" style="top:auto;bottom:14px">This sheet is set in the Notebook design language it indexes.</aside>
-      </div>
-      <p class="readout" id="readout" aria-live="polite">premise / folio order · 9 folios on the sheet</p>
+    <p class="kicker">01 · The sheet</p>
+    <h2>Nine sites, three states.</h2>
+    <p class="lede">Six sites are under active revision. Three are settled and kept. Folio 10 is reserved for whatever comes next. Nine sites
+      <span class="inline-series" role="img" aria-label="State mix: 6 under revision, 3 settled"><svg viewBox="0 0 78 22" aria-hidden="true"><g id="mix"></g></svg></span>
+      on one sheet.</p>
+    <p class="control-label">Order the sheet by</p>
+    <div class="control-row" role="group" aria-label="Ordering">
+      <button class="control" data-order="folio" aria-pressed="true">Folio order</button>
+      <button class="control" data-order="state" aria-pressed="false">By state</button>
+      <button class="control" data-order="intent" aria-pressed="false">By intent</button>
     </div>
-    <div class="section-margin">
-      <p class="aside-note"><strong>Direct keying.</strong> Each margin note touches the claim it qualifies. The sanguine leaders end at the exact blocks they describe, recalculated with the rendered layout. No detached legend.</p>
-      <p class="aside-note"><strong>Answer-first.</strong> The conclusion (which site matches your question) is visible before any control is touched. The controls change the comparison, never gate the answer.</p>
-      <p class="aside-note"><strong>Small multiples.</strong> Every block shares one format. Only the state of certainty changes, so comparison happens in space, not from memory.</p>
+    <p class="control-label">Show one state at a time</p>
+    <div class="control-row" role="group" aria-label="State filter">
+      <button class="control" data-focus="all" aria-pressed="true">All</button>
+      <button class="control" data-focus="underdrawing" aria-pressed="false">Reserved</button>
+      <button class="control" data-focus="working" aria-pressed="false">In revision</button>
+      <button class="control" data-focus="committed" aria-pressed="false">Settled</button>
     </div>
+    <div class="sheet" id="sheetEl" data-focus="all">
+      <svg id="leaders" aria-hidden="true"></svg>
+      <div id="bands"></div>
+      <aside class="cross-note" data-lyr="working" id="noteA">New benches graduate into portfolio proof cards. The lab feeds the record.</aside>
+    </div>
+    <p class="readout" id="readout" aria-live="polite">folio order · 9 sites + 1 reserved</p>
   </section>
 
   <section class="section" id="register">
-    <div class="section-main">
-      <p class="kicker">02 · The register</p>
-      <h2>Why each site deserves your visit.</h2>
-      <p class="lede">One subject, one verdict. The line in ink is the reason to go; the disclosure beside it carries the evidence. Nothing here asks you to take the verdict on faith.</p>
-      <div class="register" id="registerEl">
+    <p class="kicker">02 · The register</p>
+    <h2>Why each site deserves your visit.</h2>
+    <div class="register" id="registerEl">
 
-        <article class="entry" data-folio="01" data-state="working" data-intent="hire" data-revised="2026-09-17" data-name="Portfolio" data-url="https://dillingerstaffing.github.io/portfolio/" data-measure="185 proof cards · 34 articles">
-          <span class="entry-no">01</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/portfolio/">Portfolio</a></h3>
-            <p class="verdict">Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · 185 proof cards · 34 articles · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> proof cards across five layers (ISA, microarch, firmware, kernel, algorithm), a blog that teaches one atomic idea per post, and a curated reading wire. <strong>For:</strong> hiring managers and engineers vetting a systems freelancer. <strong>Cross-link:</strong> new Proving Ground benches graduate into portfolio proof cards.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/portfolio/">Visit the portfolio</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="01" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="Portfolio" data-url="https://dillingerstaffing.github.io/portfolio/" data-measure="185 proof cards · 34 articles">
+        <span class="entry-no">01</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/portfolio/">Portfolio</a></h3>
+          <p class="verdict">Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · 185 proof cards · 34 articles · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> proof cards across five layers (ISA, microarch, firmware, kernel, algorithm), a blog that teaches one atomic idea per post, and a curated reading wire. <strong>For:</strong> hiring managers and engineers vetting a systems freelancer. New Proving Ground benches graduate into portfolio proof cards.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/portfolio/">Visit the portfolio</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="02" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Proving Ground" data-url="https://dillingerstaffing.github.io/proving-ground/" data-measure="70 benches">
-          <span class="entry-no">02</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/proving-ground/">Proving Ground</a></h3>
-            <p class="verdict">Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · 70 benches · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> seventy interactive benches across computer architecture, analog and power electronics, and bench craft, one per day. <strong>For:</strong> engineers building intuition they can verify. <strong>Cross-link:</strong> benches feed the portfolio as proof cards.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/proving-ground/">Visit the proving ground</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="02" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Proving Ground" data-url="https://dillingerstaffing.github.io/proving-ground/" data-measure="70 benches">
+        <span class="entry-no">02</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/proving-ground/">Proving Ground</a></h3>
+          <p class="verdict">Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · 70 benches · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> seventy interactive benches across computer architecture, analog and power electronics, and bench craft, one per day. <strong>For:</strong> engineers building intuition they can verify.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/proving-ground/">Visit the proving ground</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="03" data-state="committed" data-intent="learn" data-revised="2026-09-17" data-name="Notebook" data-url="https://dillingerstaffing.github.io/notebook/" data-measure="10 sections · 31 sources">
-          <span class="entry-no">03</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/notebook/">Notebook</a></h3>
-            <p class="verdict">Come to read the design language this very page is written in: how a working notebook thinks, sourced to Leonardo, Tufte, and Distill.</p>
-            <p class="entry-meta"><span class="st-committed">Committed</span> · 10 sections · 31 sources · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> the complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the nine-proof build audit. <strong>For:</strong> designers and builders who want the method, not the costume. <strong>Cross-link:</strong> this folio demonstrates it.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/notebook/">Visit the notebook</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="03" data-state="committed" data-intent="learn" data-revised="2026-09-17" data-name="Notebook" data-url="https://dillingerstaffing.github.io/notebook/" data-measure="10 sections · 31 sources">
+        <span class="entry-no">03</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/notebook/">Notebook</a></h3>
+          <p class="verdict">Come to read the design language this very page follows: how a working notebook thinks, sourced to Leonardo, Tufte, and Distill.</p>
+          <p class="entry-meta"><span class="st-committed">Settled</span> · 10 sections · 31 sources · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> the complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit. <strong>For:</strong> designers and builders who want the method, not the costume.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/notebook/">Visit the notebook</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="04" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="GHOSTLIGHT" data-url="https://dillingerstaffing.github.io/ghostlight/" data-measure="10 walkthroughs · MITRE TA0005">
-          <span class="entry-no">04</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/ghostlight/">GHOSTLIGHT</a></h3>
-            <p class="verdict">Come to study stealth technique by technique: every walkthrough ships a red demo and a blue demo, so you learn the attack and the detection together.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · 10 walkthroughs · MITRE TA0005 · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&amp;CK TA0005 and D3FEND defenders. <strong>For:</strong> defenders and the curious, studied safely in the lab.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/ghostlight/">Visit ghostlight</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="04" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="GHOSTLIGHT" data-url="https://dillingerstaffing.github.io/ghostlight/" data-measure="10 walkthroughs · MITRE TA0005">
+        <span class="entry-no">04</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/ghostlight/">GHOSTLIGHT</a></h3>
+          <p class="verdict">Come to study stealth technique by technique: every walkthrough ships a red demo and a blue demo, so you learn the attack and the detection together.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · 10 walkthroughs · MITRE TA0005 · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&amp;CK TA0005 and D3FEND defenders. <strong>For:</strong> defenders and the curious, studied safely in the lab.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/ghostlight/">Visit ghostlight</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="05" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="Wigmore" data-url="https://dillingerstaffing.github.io/wigmore/" data-measure="shareable evidence charts">
-          <span class="entry-no">05</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/wigmore/">Wigmore</a></h3>
-            <p class="verdict">Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.</p>
-            <p class="entry-meta"><span class="st-committed">Committed</span> · shareable evidence charts · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> a chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection. <strong>For:</strong> anyone who wants to reason in public.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/wigmore/">Visit wigmore</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="05" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="Wigmore" data-url="https://dillingerstaffing.github.io/wigmore/" data-measure="shareable evidence charts">
+        <span class="entry-no">05</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/wigmore/">Wigmore</a></h3>
+          <p class="verdict">Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.</p>
+          <p class="entry-meta"><span class="st-committed">Settled</span> · shareable evidence charts · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection. <strong>For:</strong> anyone who wants to reason in public.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/wigmore/">Visit wigmore</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="06" data-state="working" data-intent="acquire" data-revised="2026-09-17" data-name="OLD IRON" data-url="https://dillingerstaffing.github.io/old-iron/" data-measure="NIST 800-88 wiping">
-          <span class="entry-no">06</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/old-iron/">OLD IRON</a></h3>
-            <p class="verdict">Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · NIST 800-88 wiping · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> a terse service page: what is picked up, how wiping is certified per serial, how logistics are insured. <strong>For:</strong> teams retiring hardware honestly.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/old-iron/">Visit old iron</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="06" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="OLD IRON" data-url="https://dillingerstaffing.github.io/old-iron/" data-measure="NIST 800-88 wiping">
+        <span class="entry-no">06</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/old-iron/">OLD IRON</a></h3>
+          <p class="verdict">Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · NIST 800-88 wiping · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a terse service page: what is picked up, how wiping is certified per serial, how logistics are insured. <strong>For:</strong> teams retiring hardware honestly.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/old-iron/">Visit old iron</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="07" data-state="working" data-intent="acquire" data-revised="2026-09-17" data-name="TAPEOUT" data-url="https://dillingerstaffing.github.io/tapeout/" data-measure="quote-based · burn-in tested">
-          <span class="entry-no">07</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/tapeout/">TAPEOUT</a></h3>
-            <p class="verdict">Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&amp;D log that claims no tapeout.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · quote-based · burn-in tested · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> a lean distribution page with no fake inventory, plus an open lab log of real progress. <strong>For:</strong> buyers of GPUs and compute parts.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/tapeout/">Visit tapeout</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="07" data-state="working" data-intent="engage" data-revised="2026-09-17" data-name="TAPEOUT" data-url="https://dillingerstaffing.github.io/tapeout/" data-measure="quote-based · burn-in tested">
+        <span class="entry-no">07</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/tapeout/">TAPEOUT</a></h3>
+          <p class="verdict">Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&amp;D log that claims no tapeout.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · quote-based · burn-in tested · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a lean distribution page with no fake inventory, plus an open lab log of real progress. <strong>For:</strong> buyers of GPUs and compute parts.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/tapeout/">Visit tapeout</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="08" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="UNSTUCK" data-url="https://dillingerstaffing.github.io/unstuck/" data-measure="plain-words fixes">
-          <span class="entry-no">08</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/unstuck/">UNSTUCK</a></h3>
-            <p class="verdict">Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.</p>
-            <p class="entry-meta"><span class="st-committed">Committed</span> · plain-words fixes · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> a one-page card: a plain-language fix list, a three-step process, tap-to-call. <strong>For:</strong> non-technical users who want help without jargon.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/unstuck/">Visit unstuck</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="08" data-state="committed" data-intent="use" data-revised="2026-09-17" data-name="UNSTUCK" data-url="https://dillingerstaffing.github.io/unstuck/" data-measure="plain-words fixes">
+        <span class="entry-no">08</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/unstuck/">UNSTUCK</a></h3>
+          <p class="verdict">Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.</p>
+          <p class="entry-meta"><span class="st-committed">Settled</span> · plain-words fixes · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> a one-page card: a plain-language fix list, a three-step process, tap-to-call. <strong>For:</strong> non-technical users who want help without jargon.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/unstuck/">Visit unstuck</a>
+        </div>
+      </article>
 
-        <article class="entry" data-folio="09" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Signs" data-url="https://dillingerstaffing.github.io/signs/" data-measure="10 sign classes">
-          <span class="entry-no">09</span>
-          <div>
-            <h3><a href="https://dillingerstaffing.github.io/signs/">Signs</a></h3>
-            <p class="verdict">Come to watch text turn into semiotics: an experiment that classifies writing into Peirce's ten sign classes.</p>
-            <p class="entry-meta"><span class="st-working">Working</span> · 10 sign classes · revised 2026-09-17</p>
-            <details><summary>Evidence</summary><div class="evidence-body"><strong>Inside:</strong> an experimental text-to-semiotics instrument using Peirce's own terms throughout. <strong>For:</strong> the curious.</div></details>
-            <a class="visit" href="https://dillingerstaffing.github.io/signs/">Visit signs</a>
-          </div>
-          <div></div>
-        </article>
+      <article class="entry" data-folio="09" data-state="working" data-intent="learn" data-revised="2026-09-17" data-name="Signs" data-url="https://dillingerstaffing.github.io/signs/" data-measure="10 sign classes">
+        <span class="entry-no">09</span>
+        <div>
+          <h3><a href="https://dillingerstaffing.github.io/signs/">Signs</a></h3>
+          <p class="verdict">Come to watch text turn into semiotics: an experiment that classifies writing into Peirce's ten sign classes.</p>
+          <p class="entry-meta"><span class="st-working">In revision</span> · 10 sign classes · checked 2026-09-17</p>
+          <details><summary>More</summary><div class="evidence-body"><strong>Inside:</strong> an experimental text-to-semiotics instrument using Peirce's own terms throughout. <strong>For:</strong> the curious.</div></details>
+          <a class="visit" href="https://dillingerstaffing.github.io/signs/">Visit signs</a>
+        </div>
+      </article>
 
-      </div>
-      <noscript><p class="quiet">The register above needs no script: every site is linked with its reason to visit. The sheet's ordering controls need JavaScript.</p></noscript>
-    </div>
-    <div class="section-margin">
-      <p class="aside-note"><strong>Margins carry argument.</strong> The state marks, measures, and revision dates sit beside the verdict they qualify, in the margin register. On narrow screens they move inline, never sideways.</p>
-      <p class="aside-note"><strong>Scale follows certainty.</strong> The verdict gets the largest reading type. The measure and the date are smaller and nearby. Provenance lives in section 04.</p>
     </div>
   </section>
 
-  <section class="section" id="revision">
-    <div class="section-main">
-      <p class="kicker">03 · Revision</p>
-      <h2>The changed judgment stays legible.</h2>
-      <p class="lede">A former answer remains visible as evidence of changing judgment. Each control input above records here rather than silently rewriting the sheet.</p>
-      <div class="ledger" id="ledger">
-        <div class="ledger-row">
-          <span class="ledger-no">2026-09-17</span>
-          <div><span class="ledger-old">Former judgment: a link list would do.</span><span class="ledger-new">Revised: an index that does not argue for each visit is a directory, not a folio. Every entry now carries its reason in ink.</span></div>
-        </div>
-        <div class="ledger-row">
-          <span class="ledger-no">2026-09-17</span>
-          <div><span class="ledger-new">States assigned: portfolio, proving ground, ghostlight, old iron, tapeout, and signs are working (under active revision); notebook, wigmore, and unstuck are committed (settled and kept). Folio 10 stays in underdrawing.</span></div>
-        </div>
-      </div>
-    </div>
-    <div class="section-margin">
-      <p class="aside-note"><strong>Visible revision.</strong> Superseded readings are dated and struck, never silently overwritten. Uncertainty is preserved instead of manufacturing omniscience.</p>
-    </div>
-  </section>
-
-  <section class="section" id="source">
-    <div class="section-main">
-      <p class="kicker">04 · Source</p>
-      <h2>Provenance and limits.</h2>
-      <div class="flow">
-        <div class="flow-row"><span class="flow-code">00 / subject</span><div class="flow-copy"><strong>Nine working sites, one sheet</strong><span>The thing under study, named once, in full.</span></div><span class="flow-state">●</span></div>
-        <div class="flow-row"><span class="flow-code">01 / answer</span><div class="flow-copy"><strong>Start with the site that matches your question</strong><span>The current conclusion, visible immediately.</span></div><span class="flow-state">●</span></div>
-        <div class="flow-row"><span class="flow-code">02 / evidence</span><div class="flow-copy"><strong>Each verdict keyed to its proof</strong><span>Labels and sources sit beside what they explain.</span></div><span class="flow-state">○</span></div>
-        <div class="flow-row"><span class="flow-code">03 / compare</span><div class="flow-copy"><strong>Three ordering premises, one sheet</strong><span>Alternatives share a format and stay within eye-span.</span></div><span class="flow-state">○</span></div>
-        <div class="flow-row"><span class="flow-code">04 / revise</span><div class="flow-copy"><strong>Former judgments struck, not erased</strong><span>The changed judgment is dated and subordinated.</span></div><span class="flow-state">↺</span></div>
-        <div class="flow-row"><span class="flow-code">05 / source</span><div class="flow-copy"><strong>This section</strong><span>Verified records, working notes, and open questions, kept separate.</span></div><span class="flow-state">↗</span></div>
-      </div>
-      <ul class="source-list">
-        <li><span class="src-no">01</span><div><a href="https://dillingerstaffing.github.io/portfolio/">dillingerstaffing.github.io/portfolio/</a><span>Verified live 2026-09-17 via Pages records. Measures from working notes of the same date.</span></div></li>
-        <li><span class="src-no">02</span><div><a href="https://dillingerstaffing.github.io/proving-ground/">dillingerstaffing.github.io/proving-ground/</a><span>Verified live 2026-09-17 via Pages records. Bench count from working notes of the same date.</span></div></li>
-        <li><span class="src-no">03</span><div><a href="https://dillingerstaffing.github.io/notebook/">dillingerstaffing.github.io/notebook/</a><span>Verified live 2026-09-17 via Pages records. The design language this folio follows in full.</span></div></li>
-        <li><span class="src-no">04</span><div><a href="https://dillingerstaffing.github.io/ghostlight/">dillingerstaffing.github.io/ghostlight/</a><span>Verified live 2026-09-17 via Pages records. Walkthrough count from working notes of the same date.</span></div></li>
-        <li><span class="src-no">05</span><div><a href="https://dillingerstaffing.github.io/wigmore/">dillingerstaffing.github.io/wigmore/</a><span>Verified live 2026-09-17 via Pages records.</span></div></li>
-        <li><span class="src-no">06</span><div><a href="https://dillingerstaffing.github.io/old-iron/">dillingerstaffing.github.io/old-iron/</a><span>Verified live 2026-09-17 via Pages records.</span></div></li>
-        <li><span class="src-no">07</span><div><a href="https://dillingerstaffing.github.io/tapeout/">dillingerstaffing.github.io/tapeout/</a><span>Verified live 2026-09-17 via Pages records.</span></div></li>
-        <li><span class="src-no">08</span><div><a href="https://dillingerstaffing.github.io/unstuck/">dillingerstaffing.github.io/unstuck/</a><span>Verified live 2026-09-17 via Pages records.</span></div></li>
-        <li><span class="src-no">09</span><div><a href="https://dillingerstaffing.github.io/signs/">dillingerstaffing.github.io/signs/</a><span>Verified live 2026-09-17 via Pages records.</span></div></li>
-      </ul>
-      <p class="quiet" style="margin-top:26px;font-size:15px">Open question: per-site measures are working notes, not live-verified counts; the next revision re-checks each against its live page.</p>
-    </div>
-    <div class="section-margin">
-      <p class="aside-note"><strong>Provenance.</strong> Live-verified records, working notes, and open questions are kept separate. One label never upgrades another.</p>
-    </div>
+  <section class="section" id="provenance">
+    <p class="kicker">03 · Provenance</p>
+    <h2>Checked, not assumed.</h2>
+    <p class="lede">All nine sites confirmed serving on 2026-09-17. Measures are from working notes of the same date.</p>
+    <ul class="source-list">
+      <li><span class="src-no">01</span><div><a href="https://dillingerstaffing.github.io/portfolio/">dillingerstaffing.github.io/portfolio/</a></div></li>
+      <li><span class="src-no">02</span><div><a href="https://dillingerstaffing.github.io/proving-ground/">dillingerstaffing.github.io/proving-ground/</a></div></li>
+      <li><span class="src-no">03</span><div><a href="https://dillingerstaffing.github.io/notebook/">dillingerstaffing.github.io/notebook/</a></div></li>
+      <li><span class="src-no">04</span><div><a href="https://dillingerstaffing.github.io/ghostlight/">dillingerstaffing.github.io/ghostlight/</a></div></li>
+      <li><span class="src-no">05</span><div><a href="https://dillingerstaffing.github.io/wigmore/">dillingerstaffing.github.io/wigmore/</a></div></li>
+      <li><span class="src-no">06</span><div><a href="https://dillingerstaffing.github.io/old-iron/">dillingerstaffing.github.io/old-iron/</a></div></li>
+      <li><span class="src-no">07</span><div><a href="https://dillingerstaffing.github.io/tapeout/">dillingerstaffing.github.io/tapeout/</a></div></li>
+      <li><span class="src-no">08</span><div><a href="https://dillingerstaffing.github.io/unstuck/">dillingerstaffing.github.io/unstuck/</a></div></li>
+      <li><span class="src-no">09</span><div><a href="https://dillingerstaffing.github.io/signs/">dillingerstaffing.github.io/signs/</a></div></li>
+    </ul>
   </section>
 
   <footer class="final-mark">
-    <div><strong>The Index Folio.</strong><br />Set in the Notebook design language, in its entirety. Folio 00, opened 17 IX 2026.</div>
+    <div><strong>The Index Folio.</strong><br />Set in the Notebook design language. Folio 00.</div>
     <div class="folio-id">C. Dillinger<br />Working index</div>
   </footer>
 </div>
@@ -526,7 +435,6 @@
   var bandsEl = document.getElementById('bands');
   var sheetEl = document.getElementById('sheetEl');
   var readout = document.getElementById('readout');
-  var ledger = document.getElementById('ledger');
   var leaders = document.getElementById('leaders');
   var noteA = document.getElementById('noteA');
 
@@ -537,22 +445,21 @@
       state: el.getAttribute('data-state'),
       intent: el.getAttribute('data-intent'),
       name: el.getAttribute('data-name'),
-      url: el.getAttribute('data-url'),
-      measure: el.getAttribute('data-measure')
+      url: el.getAttribute('data-url')
     };
   });
 
   var INTENT_ORDER = { learn: 0, use: 1, engage: 2 };
   var INTENT_LABEL = { learn: 'Learn', use: 'Use', engage: 'Engage' };
   var INTENT_SUB = {
-    learn: 'Come to understand something. The verdict is the lesson.',
-    use: 'Come to do something. The tool is the verdict.',
-    engage: 'Come to hire, to buy, or to retire hardware. The offer is the verdict.'
+    learn: 'Come to understand something.',
+    use: 'Come to do something.',
+    engage: 'Come to hire, to buy, or to retire hardware.'
   };
   var STATE_SUB = {
-    committed: 'Settled and kept. The retained structure is darkest.',
-    working: 'Under active revision. Visible, but not final.',
-    underdrawing: 'Structure considered. Allowed to be wrong.'
+    committed: 'Settled and kept.',
+    working: 'Under active revision.',
+    underdrawing: 'Reserved. The next site earns its block.'
   };
 
   var premise = 'folio';
@@ -576,19 +483,19 @@
     var sorted = entries.slice();
     if (premise === 'folio') {
       sorted.sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-      html += band('Folio 01-09 / reading order', 'commit', 'One subject, one block. The order is the argument.',
-        sorted.map(blockHTML).join(''));
-      html += band('Underdrawing / folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'premise / folio order · 9 folios + 1 reserved on the sheet';
+      html += band('Folio 01-09', 'commit', 'Reading order.', sorted.map(blockHTML).join(''));
+      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
+      readout.textContent = 'folio order · 9 sites + 1 reserved';
     } else if (premise === 'state') {
       ['committed', 'working'].forEach(function (st) {
         var items = sorted.filter(function (s) { return s.state === st; })
           .sort(function (a, b) { return a.folio < b.folio ? -1 : 1; });
-        html += band(st + ' / ' + items.length, st === 'committed' ? 'commit' : 'work', STATE_SUB[st],
+        var lbl = st === 'committed' ? 'Settled' : 'In revision';
+        html += band(lbl + ' / ' + items.length, st === 'committed' ? 'commit' : 'work', STATE_SUB[st],
           items.map(blockHTML).join(''));
       });
-      html += band('Underdrawing / folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'premise / by state · 3 committed · 6 working · 1 reserved';
+      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
+      readout.textContent = 'by state · 3 settled · 6 in revision · 1 reserved';
     } else {
       ['learn', 'use', 'engage'].forEach(function (in_) {
         var items = sorted.filter(function (s) { return s.intent === in_; })
@@ -596,8 +503,8 @@
         html += band(INTENT_LABEL[in_] + ' / ' + items.length, in_ === 'learn' ? 'commit' : 'work', INTENT_SUB[in_],
           items.map(blockHTML).join(''));
       });
-      html += band('Underdrawing / folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
-      readout.textContent = 'premise / by intent · 4 learn · 2 use · 3 engage · 1 reserved';
+      html += band('Folio 10', 'under', STATE_SUB.underdrawing, reservedHTML());
+      readout.textContent = 'by intent · 4 learn · 2 use · 3 engage · 1 reserved';
     }
     bandsEl.innerHTML = html;
     reorderRegister();
@@ -629,18 +536,6 @@
       '<circle cx="' + x2 + '" cy="' + y2 + '" r="2.5" fill="var(--sanguine)"/>';
   }
 
-  function stamp() {
-    var d = new Date();
-    function p(x) { return (x < 10 ? '0' : '') + x; }
-    return p(d.getMonth() + 1) + '/' + p(d.getDate()) + ' ' + p(d.getHours()) + ':' + p(d.getMinutes());
-  }
-  function logLedger(text) {
-    var row = document.createElement('div');
-    row.className = 'ledger-row';
-    row.innerHTML = '<span class="ledger-no">' + stamp() + '</span><div><span class="ledger-new">' + text + '</span></div>';
-    ledger.appendChild(row);
-  }
-
   function setPressed(group, btn) {
     Array.prototype.forEach.call(group.querySelectorAll('.control'), function (b) {
       b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
@@ -652,16 +547,12 @@
       premise = btn.getAttribute('data-order');
       setPressed(btn.parentElement, btn);
       renderBands();
-      var label = btn.textContent.trim().toLowerCase();
-      logLedger('Ordering premise changed to ' + label + '. The sheet, the register, and the readout updated together.');
     });
   });
   document.querySelectorAll('[data-focus]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var f = btn.getAttribute('data-focus');
-      sheetEl.setAttribute('data-focus', f);
+      sheetEl.setAttribute('data-focus', btn.getAttribute('data-focus'));
       setPressed(btn.parentElement, btn);
-      logLedger('Commitment layer isolated: ' + btn.textContent.trim().toLowerCase() + '.');
     });
   });
 
