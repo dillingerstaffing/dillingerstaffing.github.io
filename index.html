@@ -11,10 +11,10 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <title>The Index Folio, Chris Dillinger</title>
-  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language. Each entry states why it deserves a visit." />
+  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language." />
   <link rel="canonical" href="https://dillingerstaffing.github.io/" />
   <meta property="og:title" content="The Index Folio, Chris Dillinger" />
-  <meta property="og:description" content="Nine working sites on one page. Each entry states, in a single line, why it deserves your visit." />
+  <meta property="og:description" content="Nine working sites on one page." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dillingerstaffing.github.io/" />
   <meta property="og:image" content="https://dillingerstaffing.github.io/og-image.png" />
@@ -24,7 +24,7 @@
   <meta property="og:site_name" content="The Index Folio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Index Folio, Chris Dillinger" />
-  <meta name="twitter:description" content="Nine working sites on one page. Each entry states, in a single line, why it deserves your visit." />
+  <meta name="twitter:description" content="Nine working sites on one page." />
   <meta name="twitter:image" content="https://dillingerstaffing.github.io/og-image.png" />
   <meta name="twitter:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit." />
   <script type="application/ld+json">
@@ -33,7 +33,7 @@
     "@type": "WebSite",
     "name": "The Index Folio",
     "url": "https://dillingerstaffing.github.io/",
-    "description": "One page indexing every working site by Chris Dillinger. Each entry states why it deserves a visit.",
+    "description": "One page indexing every working site by Chris Dillinger.",
     "author": { "@type": "Person", "name": "Chris Dillinger" },
     "inLanguage": "en"
   }
@@ -182,7 +182,6 @@
     .entry-no { font: 11px/1.4 var(--font-technical); letter-spacing: .055em; padding-top: 6px; color: var(--ink-soft); }
     .entry h3 { margin: 0 0 6px; }
     .entry h3 a { text-decoration-thickness: 1px; }
-    .verdict { font-size: 21px; line-height: 1.3; margin: 0 0 10px; max-width: 44rem; }
     .entry-meta { font: 10px/1.6 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; color: var(--ink-soft); display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
     .entry-meta svg { display: block; transform: translateY(1px); }
     .entry details { margin-top: 12px; }
@@ -261,7 +260,6 @@
 
   <section class="section" id="register-s">
     <p class="kicker">04 · The register</p>
-    <h2>Why each site deserves your visit.</h2>
     <div class="register" id="register"></div>
   </section>
 
@@ -292,39 +290,30 @@
   var SITES = [
     { folio: '01', name: 'Portfolio', slug: 'portfolio', url: 'https://dillingerstaffing.github.io/portfolio/',
       weekly: [0,0,0,0,0,0,0,0,0,0,195,195], pushed: '2026-09-17T21:37:25Z',
-      verdict: 'Come to see first-principles RISC-V, C, and kernel work with every claim backed by a runnable demo, and to hire the person who wrote it for your board, firmware, or kernel problem.',
       evidence: 'Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.' },
     { folio: '02', name: 'Proving Ground', slug: 'proving-ground', url: 'https://dillingerstaffing.github.io/proving-ground/',
       weekly: [0,0,0,0,0,0,0,0,0,0,82,112], pushed: '2026-09-17T22:17:03Z',
-      verdict: 'Come to learn one mechanism per bench, from branch prediction to burn-in, each taught why-first with a simulation you can check by hand.',
       evidence: 'Seventy-one interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.' },
     { folio: '03', name: 'Notebook', slug: 'notebook', url: 'https://dillingerstaffing.github.io/notebook/',
       weekly: [0,0,0,0,0,0,0,0,0,0,0,3], pushed: '2026-09-18T00:08:32Z',
-      verdict: "Come to read a working notebook's design language: material grammar, composition, and built examples, sourced to Leonardo, Tufte, and Distill.",
       evidence: 'The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.' },
     { folio: '04', name: 'GHOSTLIGHT', slug: 'ghostlight', url: 'https://dillingerstaffing.github.io/ghostlight/',
       weekly: [0,0,0,0,0,0,0,0,0,0,0,40], pushed: '2026-09-17T19:47:38Z',
-      verdict: 'Come to study stealth technique by technique: every walkthrough ships a red demo and a blue demo, so you learn the attack and the detection together.',
       evidence: 'Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.' },
     { folio: '05', name: 'Wigmore', slug: 'wigmore', url: 'https://dillingerstaffing.github.io/wigmore/',
       weekly: [0,0,0,0,0,0,0,0,0,0,0,32], pushed: '2026-09-17T01:27:24Z',
-      verdict: 'Come to lay out an argument as an evidence chart: claims, support, and doubt in one strict view, shareable by link.',
       evidence: 'A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.' },
     { folio: '06', name: 'OLD IRON', slug: 'old-iron', url: 'https://dillingerstaffing.github.io/old-iron/',
       weekly: [0,0,0,0,0,0,0,0,0,0,60,76], pushed: '2026-09-18T06:32:58Z',
-      verdict: 'Come when hardware is done earning: free pickup of retired servers and GPUs, certified data wiping, insured logistics, recycling fees quoted up front.',
       evidence: 'A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.' },
     { folio: '07', name: 'TAPEOUT', slug: 'tapeout', url: 'https://dillingerstaffing.github.io/tapeout/',
       weekly: [0,0,0,0,0,0,0,0,0,0,63,81], pushed: '2026-09-18T06:33:03Z',
-      verdict: 'Come for compute hardware the lean way: quoted parts, burn-in testing, and an honest R&D log that claims no tapeout.',
       evidence: 'A lean distribution page with no fake inventory, plus an open lab log of real progress.' },
     { folio: '08', name: 'UNSTUCK', slug: 'unstuck', url: 'https://dillingerstaffing.github.io/unstuck/',
       weekly: [0,0,0,0,0,0,0,0,0,0,0,29], pushed: '2026-09-18T08:08:53Z',
-      verdict: 'Come when the machine wins: describe what is wrong in plain words, get it fixed, one visit at a time.',
       evidence: 'A one-page card: a plain-language fix list, a three-step process, tap-to-call.' },
     { folio: '09', name: 'Signs', slug: 'signs', url: 'https://dillingerstaffing.github.io/signs/',
       weekly: [0,0,0,0,0,0,0,0,0,0,0,25], pushed: '2026-09-17T01:27:14Z',
-      verdict: "Come to watch text turn into semiotics: an experiment that classifies writing into Peirce's ten sign classes.",
       evidence: "An experimental text-to-semiotics instrument using Peirce's own terms throughout." }
   ];
 
@@ -458,7 +447,6 @@
     ordered().forEach(function (s) {
       html += '<article class="entry"><span class="entry-no">' + s.folio + '</span><div>' +
         '<h3><a href="' + s.url + '">' + s.name + '</a></h3>' +
-        '<p class="verdict">' + s.verdict + '</p>' +
         '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days \u00B7 pushed ' + s.pushDay + '</span></p>' +
         '<details><summary>More</summary><div class="evidence-body">' + s.evidence + '</div></details>' +
         '<a class="visit" href="' + s.url + '">Visit ' + s.name.toLowerCase() + '</a>' +
