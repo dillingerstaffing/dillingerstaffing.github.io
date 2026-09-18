@@ -251,6 +251,64 @@
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: 0.01ms !important; }
     }
+  
+    /* linked selection */
+    [data-slug] { transition: opacity .18s ease; }
+    .dim { opacity: .28; }
+    .crow.sel { box-shadow: inset 2px 0 0 var(--sanguine); }
+    .mult.sel { outline: 1px solid var(--sanguine); outline-offset: 3px; }
+    .entry.sel { border-left: 2px solid var(--sanguine); padding-left: 18px; }
+    .lbar i.sel { outline: 2px solid var(--sanguine); outline-offset: -2px; }
+    .lkey span.sel b { color: var(--sanguine); }
+    .node { cursor: pointer; }
+    .node.sel circle.dot { stroke: var(--sanguine); stroke-width: 2.5; }
+    .crow, .mult, .drow, .hrow, .lbar i, .lkey span { cursor: pointer; }
+    .entry { cursor: pointer; }
+    @media (prefers-reduced-motion: reduce) { [data-slug], #inspector { transition: none; } }
+    .readout { font: 11px/1.6 var(--font-technical); letter-spacing: .02em; color: var(--ink-soft); margin: 10px 0 0; min-height: 17px; }
+    .dc, .hc { cursor: pointer; }
+    /* hour-of-day section */
+    .hours { margin-top: 26px; display: flex; flex-direction: column; gap: 12px; }
+    .hrow { display: grid; grid-template-columns: 1fr; gap: 6px; align-items: center; }
+    .hname { font: 500 11px/1.3 var(--font-technical); text-transform: uppercase; letter-spacing: .05em; }
+    .hname a { text-decoration: none; }
+    .hstrip { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 2px; }
+    .hstrip i { aspect-ratio: 1 / 1; min-width: 0; background: var(--ghost); display: block; }
+    .hpeak { font: 11px/1.3 var(--font-technical); color: var(--ink-soft); }
+    .hticks-wrap { display: grid; grid-template-columns: 1fr; margin-top: 8px; }
+    .hticks { display: grid; grid-template-columns: repeat(24, minmax(0, 1fr)); gap: 2px; font: 9px/1 var(--font-technical); color: var(--ink-soft); }
+    @media (min-width: 760px) {
+      .hrow { grid-template-columns: 150px minmax(0, 1fr) 92px; }
+      .hpeak { text-align: right; }
+      .hticks-wrap { grid-template-columns: 150px minmax(0, 1fr) 92px; }
+      .hticks { grid-column: 2; }
+    }
+    /* inspector */
+    #inspector { position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: var(--paper);
+      border-top: 1px solid var(--hairline); transform: translateY(103%); transition: transform .22s ease;
+      padding-bottom: env(safe-area-inset-bottom); }
+    #inspector.open { transform: none; box-shadow: 0 -8px 24px rgba(0, 0, 0, .08); }
+    .insp-bar { display: flex; align-items: stretch; }
+    .insp-toggle { flex: 1; min-width: 0; display: flex; align-items: baseline; gap: 10px; background: none;
+      border: 0; color: var(--ink); font: inherit; padding: 14px 16px; cursor: pointer; text-align: left; }
+    .insp-name { font: 500 12px/1.3 var(--font-technical); text-transform: uppercase; letter-spacing: .06em; white-space: nowrap; }
+    .insp-sum { font: 11px/1.3 var(--font-technical); color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .insp-chev { margin-left: auto; color: var(--sanguine); font: 500 14px/1 var(--font-technical); }
+    .insp-nav { display: flex; }
+    .insp-nav button, .insp-x { background: none; border: 0; color: var(--ink-soft); font: 14px/1 var(--font-technical); padding: 14px 12px; cursor: pointer; }
+    .insp-nav button:hover, .insp-x:hover { color: var(--sanguine); }
+    .insp-body { border-top: 1px solid var(--hairline); padding: 14px 16px 18px; max-height: 62vh; overflow-y: auto; }
+    .insp-line { font: 11px/1.7 var(--font-technical); letter-spacing: .02em; color: var(--ink-soft); margin: 0; }
+    .insp-line .m { color: var(--sanguine); font-weight: 500; }
+    .insp-spark { margin: 12px 0 4px; }
+    .insp-foot { display: flex; justify-content: space-between; align-items: baseline; margin: 10px 0 0; }
+    .insp-hint { font: 10px/1.4 var(--font-technical); color: var(--ink-soft); }
+    body.has-inspector .folio { padding-bottom: 64px; }
+    @media (min-width: 760px) {
+      #inspector { left: auto; right: 24px; bottom: 24px; width: 400px; border: 1px solid var(--hairline); padding-bottom: 0; }
+      body.has-inspector .folio { padding-bottom: 0; }
+    }
+
   </style>
 </head>
 <body>
@@ -278,6 +336,13 @@
   <section class="section" id="measure">
     <p class="kicker">02 · The measure</p>
     <h2 id="measureH">Commits, last 28 days.</h2>
+    <p class="control-label">Quantity</p>
+    <div class="control-row" role="group" aria-label="Measured quantity">
+      <button class="control" data-measure="commits" aria-pressed="true">Commits</button>
+      <button class="control" data-measure="days" aria-pressed="false">Active days</button>
+      <button class="control" data-measure="weight" aria-pressed="false">Page weight</button>
+      <button class="control" data-measure="push" aria-pressed="false">Last push</button>
+    </div>
     <div class="chart" id="chart"></div>
   </section>
 
@@ -291,26 +356,48 @@
     <p class="kicker">04 · Twenty-eight days</p>
     <h2>Day by day.</h2>
     <p class="key-line">Columns run week by week, rows Sunday to Saturday. Darker means more commits.</p>
+    <p class="control-label">Cell scale</p>
+    <div class="control-row" role="group" aria-label="Day cell scale">
+      <button class="control" data-scale="dayScale" data-val="shared" aria-pressed="true">Shared</button>
+      <button class="control" data-scale="dayScale" data-val="persite" aria-pressed="false">Per site</button>
+    </div>
     <div class="days" id="days"></div>
+    <p class="readout" id="dayReadout" aria-live="polite">Tap a day for its exact count.</p>
     <p class="verdict-line">Portfolio stayed active 11 of the last 28 days, more than any other site. <span class="m">394 commits.</span></p>
   </section>
 
   <section class="section" id="rhythm-s">
     <p class="kicker">05 · The rhythm</p>
     <h2>When the work lands.</h2>
+    <p class="control-label">Bar scale</p>
+    <div class="control-row" role="group" aria-label="Weekday bar scale">
+      <button class="control" data-scale="dowScale" data-val="shared" aria-pressed="true">Shared</button>
+      <button class="control" data-scale="dowScale" data-val="persite" aria-pressed="false">Per site</button>
+    </div>
     <div class="mults" id="rhythm"></div>
     <p class="verdict-line">87% of all commits land Monday to Friday. <span class="m">The loops work weekdays; weekends go quiet.</span></p>
   </section>
 
-  <section class="section" id="inventory-s">
-    <p class="kicker">06 · The inventory</p>
+  
+  <section class="section" id="hours-s">
+    <p class="kicker">06 · The hours</p>
+    <h2>All hours, no office.</h2>
+    <p class="key-line">Hour of day, UTC. Darker means more commits.</p>
+    <div class="hours" id="hours"></div>
+    <div class="hticks-wrap"><div class="hticks" aria-hidden="true"><span style="grid-column:1">00</span><span style="grid-column:7">06</span><span style="grid-column:13">12</span><span style="grid-column:19">18</span></div></div>
+    <p class="readout" id="hourReadout" aria-live="polite">Tap an hour for its exact count.</p>
+    <p class="verdict-line">Commits land in every hour of the day. <span class="m">16:00 UTC is the single busiest hour.</span></p>
+  </section>
+
+<section class="section" id="inventory-s">
+    <p class="kicker">07 · The inventory</p>
     <h2>What the commits built.</h2>
     <div class="chart" id="inventory"></div>
     <p class="verdict-line">Portfolio ships the most content: <span class="m">187 projects and 37 articles.</span></p>
   </section>
 
   <section class="section" id="ledger-s">
-    <p class="kicker">07 · The ledger</p>
+    <p class="kicker">08 · The ledger</p>
     <h2>Share of the month.</h2>
     <div class="lbar" id="lbar" role="img" aria-label="Share of 1004 commits in the last 28 days by site"></div>
     <div class="lkey" id="lkey"></div>
@@ -318,21 +405,22 @@
   </section>
 
   <section class="section" id="register-s">
-    <p class="kicker">08 · The register</p>
+    <p class="kicker">09 · The register</p>
     <div class="register" id="register"></div>
   </section>
 
   <section class="section" id="revision">
-    <p class="kicker">09 · Revision</p>
+    <p class="kicker">10 · Revision</p>
     <h2>Revision.</h2>
+    <p class="rev"><span class="rev-date">2026-09-18</span>Interactivity pass: every display is now linked. Tap any site to highlight it across every display and open its inspector; the measure takes four quantities; day, weekday, and hour cells answer with exact counts; a new hour-of-day section shows when the work actually lands.</p>
     <p class="rev"><span class="rev-date">2026-09-18</span>The measure widened: 28-day daily calendars, weekday rhythm, a content inventory, and a share-of-attention ledger join the twelve-week bars. <s>Twelve-week bars and sparklines carried the whole measure.</s></p>
     <p class="rev"><span class="rev-date">2026-09-18</span><s>Quiet sites were labeled settled and kept.</s> Emphasis now follows measured update activity. A quiet site is de-emphasized, not settled.</p>
   </section>
 
   <section class="section" id="provenance">
-    <p class="kicker">10 · Provenance</p>
+    <p class="kicker">11 · Provenance</p>
     <h2>Provenance.</h2>
-    <p class="quiet" style="max-width:46rem">Commit counts: GitHub repository statistics (commit activity and punch card endpoints), measured 2026-09-18. Content units counted from the live pages the same day. All nine repositories were created between Sep 8 and Sep 17, 2026, so every commit falls inside the 28-day window. Push times UTC.</p>
+    <p class="quiet" style="max-width:46rem">Commit counts: GitHub repository statistics (commit activity and punch card endpoints), measured 2026-09-18. Content units counted from the live pages the same day. All nine repositories were created between Sep 8 and Sep 17, 2026, so every commit falls inside the 28-day window. Push times UTC. Hour-of-day totals come from each repository’s punch-card endpoint; hours are UTC.</p>
     <ul class="source-list" id="sourceList"></ul>
   </section>
 
@@ -341,48 +429,106 @@
     <div class="folio-id">C. Dillinger<br />Working index</div>
   </footer>
 </div>
+
+<div id="inspector" aria-live="polite">
+  <div class="insp-bar">
+    <button class="insp-toggle" id="inspToggle" aria-expanded="false" aria-controls="inspBody">
+      <span class="insp-name" id="inspName"></span>
+      <span class="insp-sum" id="inspSum"></span>
+      <span class="insp-chev" aria-hidden="true">+</span>
+    </button>
+    <span class="insp-nav" role="group" aria-label="Walk sites">
+      <button id="inspPrev" aria-label="Previous site">&larr;</button>
+      <button id="inspNext" aria-label="Next site">&rarr;</button>
+    </span>
+    <button class="insp-x" id="inspClose" aria-label="Clear selection">&times;</button>
+  </div>
+  <div class="insp-body" id="inspBody" hidden>
+    <p class="insp-line" id="inspL1"></p>
+    <p class="insp-line" id="inspL2"></p>
+    <p class="insp-line" id="inspL3"></p>
+    <p class="insp-line" id="inspL4"></p>
+    <div class="insp-spark" id="inspSpark"></div>
+    <p class="insp-foot"><a id="inspVisit" href="#">Visit</a><span class="insp-hint">&larr; &rarr; walk &middot; esc clears</span></p>
+  </div>
+</div>
+
 <script>
 (function () {
   "use strict";
   var DATA_DATE = Date.parse('2026-09-18T20:17:04Z');
-  var SITES = [{"folio":"01","name":"Portfolio","slug":"portfolio","url":"https://dillingerstaffing.github.io/portfolio/","evidence":"Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.","weekly":[0,0,0,0,0,0,0,0,0,0,304,90],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,36,112,92,55,9,18,18,31,10,4],"dow":[9,18,27,67,122,96,55],"c28":394,"repo_kb":23708,"page_kb":400,"pushed":"2026-09-18T16:14:21Z","content_n":187,"content_unit":"projects","content_note":"37 articles"},{"folio":"02","name":"Proving Ground","slug":"proving-ground","url":"https://dillingerstaffing.github.io/proving-ground/","evidence":"Seventy-two interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.","weekly":[0,0,0,0,0,0,0,0,0,0,122,77],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,42,50,12,10,3,25,11,22,6],"dow":[10,3,25,30,64,56,12],"c28":199,"repo_kb":7768,"page_kb":106,"pushed":"2026-09-18T18:50:44Z","content_n":72,"content_unit":"benches","content_note":"one per day"},{"folio":"03","name":"Notebook","slug":"notebook","url":"https://dillingerstaffing.github.io/notebook/","evidence":"The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.","weekly":[0,0,0,0,0,0,0,0,0,0,0,3],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0],"dow":[0,0,0,2,1,0,0],"c28":3,"repo_kb":295,"page_kb":292,"pushed":"2026-09-18T00:08:32Z","content_n":9,"content_unit":"patterns","content_note":"the reusable nine"},{"folio":"04","name":"GHOSTLIGHT","slug":"ghostlight","url":"https://dillingerstaffing.github.io/ghostlight/","evidence":"Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.","weekly":[0,0,0,0,0,0,0,0,0,0,0,40],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,7,10,0],"dow":[0,0,23,7,10,0,0],"c28":40,"repo_kb":9361,"page_kb":24,"pushed":"2026-09-17T19:47:38Z","content_n":10,"content_unit":"walkthroughs","content_note":"GH-001 to GH-010"},{"folio":"05","name":"Wigmore","slug":"wigmore","url":"https://dillingerstaffing.github.io/wigmore/","evidence":"A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.","weekly":[0,0,0,0,0,0,0,0,0,0,0,32],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,8,2,0],"dow":[0,0,22,8,2,0,0],"c28":32,"repo_kb":640,"page_kb":101,"pushed":"2026-09-17T01:27:24Z","content_n":1,"content_unit":"chart builder","content_note":"strict schema"},{"folio":"06","name":"OLD IRON","slug":"old-iron","url":"https://dillingerstaffing.github.io/old-iron/","evidence":"A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.","weekly":[0,0,0,0,0,0,0,0,0,0,77,59],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,24,19,7,12,15,15,6,10,1],"dow":[12,15,15,33,34,20,7],"c28":136,"repo_kb":1916,"page_kb":64,"pushed":"2026-09-18T06:32:58Z","content_n":1,"content_unit":"service page","content_note":"pickup and wiping"},{"folio":"07","name":"TAPEOUT","slug":"tapeout","url":"https://dillingerstaffing.github.io/tapeout/","evidence":"A lean distribution page with no fake inventory, plus an open lab log of real progress.","weekly":[0,0,0,0,0,0,0,0,0,0,77,67],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,26,16,6,12,12,15,14,12,2],"dow":[12,12,15,43,38,18,6],"c28":144,"repo_kb":3325,"page_kb":67,"pushed":"2026-09-18T06:33:03Z","content_n":1,"content_unit":"service page","content_note":"open lab log"},{"folio":"08","name":"UNSTUCK","slug":"unstuck","url":"https://dillingerstaffing.github.io/unstuck/","evidence":"A one-page card: a plain-language fix list, a three-step process, tap-to-call.","weekly":[0,0,0,0,0,0,0,0,0,0,0,31],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,7,6,5,7],"dow":[4,2,7,6,5,7,0],"c28":31,"repo_kb":233,"page_kb":29,"pushed":"2026-09-18T13:38:26Z","content_n":1,"content_unit":"service page","content_note":"plain words"},{"folio":"09","name":"Signs","slug":"signs","url":"https://dillingerstaffing.github.io/signs/","evidence":"An experimental text-to-semiotics instrument using Peirce's own terms throughout.","weekly":[0,0,0,0,0,0,0,0,0,0,0,25],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,21,2,0],"dow":[0,0,2,21,2,0,0],"c28":25,"repo_kb":460,"page_kb":83,"pushed":"2026-09-17T01:27:14Z","content_n":1,"content_unit":"instrument","content_note":"text to semiotics"}];
+  var SITES = [{"folio":"01","name":"Portfolio","slug":"portfolio","url":"https://dillingerstaffing.github.io/portfolio/","evidence":"Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.","weekly":[0,0,0,0,0,0,0,0,0,0,304,90],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,36,112,92,55,9,18,18,31,10,4],"dow":[9,18,27,67,122,96,55],"c28":394,"repo_kb":23708,"page_kb":400,"pushed":"2026-09-18T16:14:21Z","content_n":187,"content_unit":"projects","content_note":"37 articles","hourly":[27,12,9,11,16,13,15,20,16,12,19,11,19,13,9,26,21,15,16,23,19,17,16,19],"peak_hour":0,"best_day_date":"Sep 10","best_day_commits":112},{"folio":"02","name":"Proving Ground","slug":"proving-ground","url":"https://dillingerstaffing.github.io/proving-ground/","evidence":"Seventy-two interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.","weekly":[0,0,0,0,0,0,0,0,0,0,122,77],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,42,50,12,10,3,25,11,22,6],"dow":[10,3,25,30,64,56,12],"c28":199,"repo_kb":7768,"page_kb":106,"pushed":"2026-09-18T18:50:44Z","content_n":72,"content_unit":"benches","content_note":"one per day","hourly":[8,8,5,5,5,10,9,4,14,12,8,7,6,10,22,1,12,6,14,5,9,9,3,8],"peak_hour":14,"best_day_date":"Sep 11","best_day_commits":50},{"folio":"03","name":"Notebook","slug":"notebook","url":"https://dillingerstaffing.github.io/notebook/","evidence":"The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.","weekly":[0,0,0,0,0,0,0,0,0,0,0,3],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0],"dow":[0,0,0,2,1,0,0],"c28":3,"repo_kb":295,"page_kb":292,"pushed":"2026-09-18T00:08:32Z","content_n":9,"content_unit":"patterns","content_note":"the reusable nine","hourly":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0],"peak_hour":20,"best_day_date":"Sep 16","best_day_commits":2},{"folio":"04","name":"GHOSTLIGHT","slug":"ghostlight","url":"https://dillingerstaffing.github.io/ghostlight/","evidence":"Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.","weekly":[0,0,0,0,0,0,0,0,0,0,0,40],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,7,10,0],"dow":[0,0,23,7,10,0,0],"c28":40,"repo_kb":9361,"page_kb":24,"pushed":"2026-09-17T19:47:38Z","content_n":10,"content_unit":"walkthroughs","content_note":"GH-001 to GH-010","hourly":[2,2,0,0,1,5,8,0,4,4,2,0,1,3,2,4,0,0,0,1,0,0,0,1],"peak_hour":6,"best_day_date":"Sep 15","best_day_commits":23},{"folio":"05","name":"Wigmore","slug":"wigmore","url":"https://dillingerstaffing.github.io/wigmore/","evidence":"A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.","weekly":[0,0,0,0,0,0,0,0,0,0,0,32],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,8,2,0],"dow":[0,0,22,8,2,0,0],"c28":32,"repo_kb":640,"page_kb":101,"pushed":"2026-09-17T01:27:24Z","content_n":1,"content_unit":"chart builder","content_note":"strict schema","hourly":[1,1,0,0,1,6,0,0,0,0,0,0,0,2,10,6,0,1,3,0,0,0,0,1],"peak_hour":14,"best_day_date":"Sep 15","best_day_commits":22},{"folio":"06","name":"OLD IRON","slug":"old-iron","url":"https://dillingerstaffing.github.io/old-iron/","evidence":"A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.","weekly":[0,0,0,0,0,0,0,0,0,0,77,59],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,24,19,7,12,15,15,6,10,1],"dow":[12,15,15,33,34,20,7],"c28":136,"repo_kb":1916,"page_kb":64,"pushed":"2026-09-18T06:32:58Z","content_n":1,"content_unit":"service page","content_note":"pickup and wiping","hourly":[4,5,3,3,3,6,7,6,9,5,9,4,8,10,7,4,8,5,8,6,5,4,4,3],"peak_hour":13,"best_day_date":"Sep 9","best_day_commits":27},{"folio":"07","name":"TAPEOUT","slug":"tapeout","url":"https://dillingerstaffing.github.io/tapeout/","evidence":"A lean distribution page with no fake inventory, plus an open lab log of real progress.","weekly":[0,0,0,0,0,0,0,0,0,0,77,67],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,26,16,6,12,12,15,14,12,2],"dow":[12,12,15,43,38,18,6],"c28":144,"repo_kb":3325,"page_kb":67,"pushed":"2026-09-18T06:33:03Z","content_n":1,"content_unit":"service page","content_note":"open lab log","hourly":[3,4,2,1,3,6,11,6,8,4,9,2,8,11,7,6,10,6,9,4,7,6,3,8],"peak_hour":6,"best_day_date":"Sep 9","best_day_commits":29},{"folio":"08","name":"UNSTUCK","slug":"unstuck","url":"https://dillingerstaffing.github.io/unstuck/","evidence":"A one-page card: a plain-language fix list, a three-step process, tap-to-call.","weekly":[0,0,0,0,0,0,0,0,0,0,0,31],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,7,6,5,7],"dow":[4,2,7,6,5,7,0],"c28":31,"repo_kb":233,"page_kb":29,"pushed":"2026-09-18T13:38:26Z","content_n":1,"content_unit":"service page","content_note":"plain words","hourly":[5,2,1,0,2,0,7,0,2,0,1,0,6,1,0,0,0,0,2,0,1,0,0,1],"peak_hour":6,"best_day_date":"Sep 15","best_day_commits":7},{"folio":"09","name":"Signs","slug":"signs","url":"https://dillingerstaffing.github.io/signs/","evidence":"An experimental text-to-semiotics instrument using Peirce's own terms throughout.","weekly":[0,0,0,0,0,0,0,0,0,0,0,25],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,21,2,0],"dow":[0,0,2,21,2,0,0],"c28":25,"repo_kb":460,"page_kb":83,"pushed":"2026-09-17T01:27:14Z","content_n":1,"content_unit":"instrument","content_note":"text to semiotics","hourly":[1,1,0,0,0,5,1,0,0,0,0,0,0,0,0,6,8,0,0,0,0,2,0,1],"peak_hour":16,"best_day_date":"Sep 16","best_day_commits":21}];
   var MAXW = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.weekly); }));
 
   SITES.forEach(function (s) {
     s.hoursAgo = (DATA_DATE - Date.parse(s.pushed)) / 3600000;
     s.pushDay = s.pushed.slice(0, 10);
     s.activeDays = s.daily.reduce(function (a, v) { return a + (v > 0 ? 1 : 0); }, 0);
+    var w = s.dow.slice(1, 6).reduce(function (a, b) { return a + b; }, 0);
+    var t = s.dow.reduce(function (a, b) { return a + b; }, 0);
+    s.wkdayPct = t > 0 ? Math.round(100 * w / t) : 0;
   });
   var MAXC = Math.max.apply(null, SITES.map(function (s) { return s.c28; }));
   var MAXH = Math.max.apply(null, SITES.map(function (s) { return s.hoursAgo; }));
   var MAXD = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.daily); }));
   var MAXN = Math.max.apply(null, SITES.map(function (s) { return s.content_n; }));
+  var MAXP = Math.max.apply(null, SITES.map(function (s) { return s.page_kb; }));
+  var MAXDOW = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.dow); }));
+  var MAXHR = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.hourly); }));
   var TOT28 = SITES.reduce(function (a, s) { return a + s.c28; }, 0);
 
-  var premise = 'activity';
+  var DAY_DATES = (function () {
+    var out = [], months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    for (var i = 0; i < 28; i++) {
+      var t = new Date(DATA_DATE - (27 - i) * 86400000);
+      out.push(months[t.getUTCMonth()] + ' ' + t.getUTCDate());
+    }
+    return out;
+  })();
+
+  var state = { premise: 'activity', measure: 'commits', selected: null, dayScale: 'shared', dowScale: 'shared' };
+
   var field = document.getElementById('field');
   var verdictLine = document.getElementById('verdictLine');
   var chartEl = document.getElementById('chart');
+  var measureH = document.getElementById('measureH');
   var multsEl = document.getElementById('mults');
   var daysEl = document.getElementById('days');
+  var dayReadout = document.getElementById('dayReadout');
   var rhythmEl = document.getElementById('rhythm');
+  var hoursEl = document.getElementById('hours');
+  var hourReadout = document.getElementById('hourReadout');
   var invEl = document.getElementById('inventory');
   var lbarEl = document.getElementById('lbar');
   var lkeyEl = document.getElementById('lkey');
   var registerEl = document.getElementById('register');
-  var measureH = document.getElementById('measureH');
 
   function ordered() {
     var a = SITES.slice();
-    if (premise === 'activity') a.sort(function (x, y) { return y.c28 - x.c28; });
-    else if (premise === 'recency') a.sort(function (x, y) { return x.hoursAgo - y.hoursAgo; });
+    if (state.premise === 'activity') a.sort(function (x, y) { return y.c28 - x.c28; });
+    else if (state.premise === 'recency') a.sort(function (x, y) { return x.hoursAgo - y.hoursAgo; });
     else a.sort(function (x, y) { return x.folio < y.folio ? -1 : 1; });
     return a;
   }
+  function bySlug(slug) {
+    for (var i = 0; i < SITES.length; i++) if (SITES[i].slug === slug) return SITES[i];
+    return null;
+  }
+
+  var MEASURES = {
+    commits: { h: 'Commits, last 28 days.', val: function (s) { return s.c28; },
+               fmt: function (v) { return '' + v; }, max: MAXC, inv: false },
+    days:    { h: 'Active days of 28.', val: function (s) { return s.activeDays; },
+               fmt: function (v) { return v + ' of 28'; }, max: 28, inv: false },
+    weight:  { h: 'Page weight.', val: function (s) { return s.page_kb; },
+               fmt: function (v) { return v + ' KB'; }, max: MAXP, inv: false },
+    push:    { h: 'Hours since last push.', val: function (s) { return s.hoursAgo; },
+               fmt: function (v) { return v.toFixed(1) + ' h'; }, max: MAXH, inv: true }
+  };
 
   function nodeR(s) {
-    if (premise === 'activity') return 5 + 13 * Math.sqrt(s.c28 / MAXC);
-    if (premise === 'recency') return 5 + 13 * (1 - s.hoursAgo / MAXH);
+    if (state.premise === 'activity') return 5 + 13 * Math.sqrt(s.c28 / MAXC);
+    if (state.premise === 'recency') return 5 + 13 * (1 - s.hoursAgo / MAXH);
     return 9;
   }
 
@@ -395,7 +541,7 @@
     });
     out += '<line x1="' + (CX - 225) + '" y1="' + CY + '" x2="' + (CX + 225) + '" y2="' + CY + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
     out += '<line x1="' + CX + '" y1="' + (CY - 205) + '" x2="' + CX + '" y2="' + (CY + 205) + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
-    var centerWord = premise === 'activity' ? 'MOST UPDATED' : premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-09';
+    var centerWord = state.premise === 'activity' ? 'MOST UPDATED' : state.premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-09';
     out += '<text x="' + CX + '" y="' + (CY + 4) + '" text-anchor="middle" font-family="var(--font-technical)" font-size="9" letter-spacing="0.08em" fill="var(--graphite)">' + centerWord + '</text>';
     order.forEach(function (s, i) {
       var ang = (-90 + i * 137.5) * Math.PI / 180;
@@ -403,29 +549,32 @@
       var x = CX + rr * Math.cos(ang), y = CY + rr * Math.sin(ang);
       var nr = nodeR(s);
       var style;
-      if (premise === 'folio') style = 'fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"';
+      if (state.premise === 'folio') style = 'fill="var(--paper)" stroke="var(--ink)" stroke-width="1.5"';
       else if (i < 3) style = 'fill="var(--ink)"';
       else if (i < 6) style = 'fill="var(--sanguine)"';
       else style = 'fill="none" stroke="var(--graphite)" stroke-width="1.5" stroke-dasharray="4 3"';
       var lx = CX + (rr + nr + 16) * Math.cos(ang), ly = CY + (rr + nr + 16) * Math.sin(ang);
       var cos = Math.cos(ang);
       var anchor = cos > 0.25 ? 'start' : cos < -0.25 ? 'end' : 'middle';
-      var lfill = (premise !== 'folio' && i >= 6) ? 'var(--graphite)' : 'var(--ink)';
+      var lfill = (state.premise !== 'folio' && i >= 6) ? 'var(--graphite)' : 'var(--ink)';
+      out += '<g class="node" data-slug="' + s.slug + '">';
+      out += '<circle class="hit" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + (nr + 14).toFixed(1) + '" fill="transparent"/>';
       out += '<line x1="' + (x + Math.cos(ang) * nr).toFixed(1) + '" y1="' + (y + Math.sin(ang) * nr).toFixed(1) +
         '" x2="' + lx.toFixed(1) + '" y2="' + ly.toFixed(1) + '" stroke="var(--sanguine)" stroke-width="1" opacity="0.75"/>';
-      out += '<circle cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + nr.toFixed(1) + '" ' + style + '/>';
+      out += '<circle class="dot" cx="' + x.toFixed(1) + '" cy="' + y.toFixed(1) + '" r="' + nr.toFixed(1) + '" ' + style + '/>';
       out += '<text x="' + lx.toFixed(1) + '" y="' + (ly + 3.5).toFixed(1) + '" text-anchor="' + anchor +
         '" font-family="var(--font-technical)" font-size="10.5" letter-spacing="0.06em" fill="' + lfill + '">' +
         s.name.toUpperCase() + '</text>';
+      out += '</g>';
     });
     field.innerHTML = out;
   }
 
   function renderVerdict() {
     var top = ordered()[0];
-    if (premise === 'activity') {
+    if (state.premise === 'activity') {
       verdictLine.innerHTML = top.name + ' carries the most weight: <span class="m">' + top.c28 + ' commits in the last 28 days.</span>';
-    } else if (premise === 'recency') {
+    } else if (state.premise === 'recency') {
       var p = top.pushed.slice(0, 16).replace('T', ' ');
       verdictLine.innerHTML = top.name + ' was touched most recently: <span class="m">pushed ' + p + ' UTC.</span>';
     } else {
@@ -434,21 +583,17 @@
   }
 
   function renderChart() {
-    var order = ordered();
+    var M = MEASURES[state.measure];
     var html = '';
-    order.forEach(function (s) {
-      var val, label, pct;
-      if (premise === 'recency') {
-        val = s.hoursAgo; label = val.toFixed(1) + ' h'; pct = (1 - val / MAXH) * 100;
-      } else {
-        val = s.c28; label = '' + val; pct = (val / MAXC) * 100;
-      }
-      html += '<div class="crow"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
+    ordered().forEach(function (s) {
+      var v = M.val(s);
+      var pct = M.inv ? (1 - v / M.max) * 100 : (v / M.max) * 100;
+      html += '<div class="crow" data-slug="' + s.slug + '"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
         '<span class="cbar"><i style="width:' + Math.max(pct, 0.6).toFixed(1) + '%"></i></span>' +
-        '<span class="cval">' + label + '</span></div>';
+        '<span class="cval">' + M.fmt(v) + '</span></div>';
     });
     chartEl.innerHTML = html;
-    measureH.textContent = premise === 'recency' ? 'Hours since last push.' : 'Commits, last 28 days.';
+    measureH.textContent = M.h;
   }
 
   function renderMults() {
@@ -459,7 +604,7 @@
         var h = v > 0 ? Math.max((v / MAXW) * 100, 5) : 0;
         bars += '<i style="height:' + h.toFixed(1) + '%"></i>';
       });
-      html += '<div class="mult"><p class="mname"><a href="' + s.url + '">' + s.name + '</a></p>' +
+      html += '<div class="mult" data-slug="' + s.slug + '"><p class="mname"><a href="' + s.url + '">' + s.name + '</a></p>' +
         '<div class="wbars" role="img" aria-label="' + s.name + ', weekly commits">' + bars + '</div>' +
         '<p class="mtotal"><b>' + s.c28 + '</b> commits / 28 days</p></div>';
     });
@@ -468,17 +613,19 @@
 
   function renderDays() {
     var html = '';
+    var smaxShared = MAXD;
     ordered().forEach(function (s) {
+      var smax = state.dayScale === 'persite' ? Math.max.apply(null, s.daily) : smaxShared;
       var cells = '';
       s.daily.forEach(function (v, i) {
         var wd = (6 + i) % 7;
         var wk = i === 0 ? 0 : Math.floor((i + 6) / 7);
-        var bg = v > 0
-          ? 'background:var(--sanguine);opacity:' + (0.3 + 0.7 * v / MAXD).toFixed(2)
+        var bg = v > 0 && smax > 0
+          ? 'background:var(--sanguine);opacity:' + (0.3 + 0.7 * v / smax).toFixed(2)
           : '';
-        cells += '<i style="grid-row:' + (wd + 1) + ';grid-column:' + (wk + 1) + ';' + bg + '"></i>';
+        cells += '<i class="dc" data-date="' + DAY_DATES[i] + '" data-n="' + v + '" style="grid-row:' + (wd + 1) + ';grid-column:' + (wk + 1) + ';' + bg + '"></i>';
       });
-      html += '<div class="drow"><span class="dname"><a href="' + s.url + '">' + s.name + '</a></span>' +
+      html += '<div class="drow" data-slug="' + s.slug + '"><span class="dname"><a href="' + s.url + '">' + s.name + '</a></span>' +
         '<span class="dcal" role="img" aria-label="' + s.name + ': ' + s.c28 + ' commits in 28 days, active ' + s.activeDays + ' days">' + cells + '</span>' +
         '<span class="dval">' + s.activeDays + ' of 28 days</span></div>';
     });
@@ -488,23 +635,41 @@
   function renderRhythm() {
     var html = '';
     var dayL = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-    var maxDow = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.dow); }));
     ordered().forEach(function (s) {
+      var smax = state.dowScale === 'persite' ? Math.max.apply(null, s.dow) : MAXDOW;
       var bars = '', labels = '';
       s.dow.forEach(function (v, i) {
-        var h = v > 0 ? Math.max((v / maxDow) * 100, 5) : 0;
+        var h = v > 0 && smax > 0 ? Math.max((v / smax) * 100, 5) : 0;
         bars += '<i style="height:' + h.toFixed(1) + '%"></i>';
         labels += '<span>' + dayL[i] + '</span>';
       });
-      var wkday = s.dow.slice(1, 6).reduce(function (a, b) { return a + b; }, 0);
-      var tot = s.dow.reduce(function (a, b) { return a + b; }, 0);
-      var pct = tot > 0 ? Math.round(100 * wkday / tot) : 0;
-      html += '<div class="mult"><p class="mname"><a href="' + s.url + '">' + s.name + '</a></p>' +
+      html += '<div class="mult" data-slug="' + s.slug + '"><p class="mname"><a href="' + s.url + '">' + s.name + '</a></p>' +
         '<div class="wbars" role="img" aria-label="' + s.name + ', commits by weekday">' + bars + '</div>' +
         '<div class="dowlabels" aria-hidden="true">' + labels + '</div>' +
-        '<p class="mtotal"><b>' + pct + '%</b> land Mon to Fri</p></div>';
+        '<p class="mtotal"><b>' + s.wkdayPct + '%</b> land Mon to Fri</p></div>';
     });
     rhythmEl.innerHTML = html;
+  }
+
+  function pad2(n) { return (n < 10 ? '0' : '') + n; }
+
+  function renderHours() {
+    var html = '';
+    ordered().forEach(function (s) {
+      var cells = '';
+      s.hourly.forEach(function (v, h) {
+        var bg = v > 0
+          ? 'background:var(--sanguine);opacity:' + (0.3 + 0.7 * v / MAXHR).toFixed(2)
+          : '';
+        cells += '<i class="hc" data-h="' + pad2(h) + '" data-n="' + v + '" style="' + bg + '"></i>';
+      });
+      var plabel = pad2(s.peak_hour) + ':00';
+      html += '<div class="hrow" data-slug="' + s.slug + '">' +
+        '<span class="hname"><a href="' + s.url + '">' + s.name + '</a></span>' +
+        '<span class="hstrip" role="img" aria-label="' + s.name + ', commits by hour of day, peak ' + plabel + ' UTC">' + cells + '</span>' +
+        '<span class="hpeak">peak ' + plabel + '</span></div>';
+    });
+    hoursEl.innerHTML = html;
   }
 
   function pluralUnit(s) {
@@ -515,7 +680,7 @@
     var html = '';
     ordered().forEach(function (s) {
       var pct = (s.content_n / MAXN) * 100;
-      html += '<div class="crow"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
+      html += '<div class="crow" data-slug="' + s.slug + '"><span class="cname"><a href="' + s.url + '">' + s.name + '</a></span>' +
         '<span class="cbar"><i style="width:' + Math.max(pct, 0.6).toFixed(1) + '%"></i></span>' +
         '<span class="cval">' + pluralUnit(s) + '</span></div>';
     });
@@ -527,8 +692,8 @@
     var bar = '', key = '';
     order.forEach(function (s) {
       var pct = 100 * s.c28 / TOT28;
-      bar += '<i style="width:' + Math.max(pct, 0.4).toFixed(2) + '%"></i>';
-      key += '<span><a href="' + s.url + '">' + s.name + '</a> <b>' + pct.toFixed(1) + '%</b></span>';
+      bar += '<i data-slug="' + s.slug + '" style="width:' + Math.max(pct, 0.4).toFixed(2) + '%"></i>';
+      key += '<span data-slug="' + s.slug + '"><a href="' + s.url + '">' + s.name + '</a> <b>' + pct.toFixed(1) + '%</b></span>';
     });
     lbarEl.innerHTML = bar;
     lkeyEl.innerHTML = key;
@@ -549,15 +714,26 @@
       weekBars(s, 84, 20).replace(/var\(--sanguine\)/g, 'var(--ink-soft)') + '</svg>';
   }
 
+  function sparkDaily(s) {
+    var W = 252, H = 26, bw = W / 28, out = '';
+    var mx = Math.max.apply(null, s.daily);
+    s.daily.forEach(function (v, i) {
+      var h = v > 0 && mx > 0 ? Math.max((v / mx) * (H - 3), 1.5) : 0;
+      out += '<rect x="' + (i * bw + 0.5).toFixed(1) + '" y="' + (H - h).toFixed(1) + '" width="' + (bw - 1).toFixed(1) +
+        '" height="' + h.toFixed(1) + '" fill="var(--sanguine)"/>';
+    });
+    return '<svg width="100%" height="26" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" role="img" aria-label="Daily commits, last 28 days">' + out + '</svg>';
+  }
+
   function fmtKB(n) { return n.toLocaleString('en-US') + ' KB'; }
 
   function renderRegister() {
     var html = '';
     ordered().forEach(function (s) {
-      html += '<article class="entry"><span class="entry-no">' + s.folio + '</span><div>' +
+      html += '<article class="entry" data-slug="' + s.slug + '"><span class="entry-no">' + s.folio + '</span><div>' +
         '<h3><a href="' + s.url + '">' + s.name + '</a></h3>' +
-        '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days \u00B7 pushed ' + s.pushDay + '</span></p>' +
-        '<p class="entry-vitals"><b>' + s.activeDays + '</b> of 28 days active \u00B7 repo ' + fmtKB(s.repo_kb) + ' \u00B7 page ' + fmtKB(s.page_kb) + '</p>' +
+        '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days · pushed ' + s.pushDay + '</span></p>' +
+        '<p class="entry-vitals"><b>' + s.activeDays + '</b> of 28 days active · repo ' + fmtKB(s.repo_kb) + ' · page ' + fmtKB(s.page_kb) + '</p>' +
         '<details><summary>More</summary><div class="evidence-body">' + s.evidence + ' Ships ' + pluralUnit(s) + ' (' + s.content_note + ').</div></details>' +
         '<a class="visit" href="' + s.url + '">Visit ' + s.name.toLowerCase() + '</a>' +
         '</div></article>';
@@ -570,9 +746,75 @@
     SITES.slice().sort(function (a, b) { return a.folio < b.folio ? -1 : 1; }).forEach(function (s) {
       html += '<li><span class="src-no">' + s.folio + '</span><div>' +
         '<a href="https://github.com/dillingerstaffing/' + s.slug + '">github.com/dillingerstaffing/' + s.slug + '</a>' +
-        '<span class="snote">' + s.c28 + ' commits in 28 days \u00B7 pushed ' + s.pushDay + '</span></div></li>';
+        '<span class="snote">' + s.c28 + ' commits in 28 days · pushed ' + s.pushDay + '</span></div></li>';
     });
     document.getElementById('sourceList').innerHTML = html;
+  }
+
+  /* linked selection */
+  var insp = document.getElementById('inspector');
+  function applySelection() {
+    var sel = state.selected;
+    var els = document.querySelectorAll('[data-slug]');
+    for (var i = 0; i < els.length; i++) {
+      var on = els[i].getAttribute('data-slug') === sel;
+      els[i].classList.toggle('sel', !!sel && on);
+      els[i].classList.toggle('dim', !!sel && !on);
+    }
+    renderInspector();
+    writeHash();
+  }
+  function toggleSelect(slug) {
+    state.selected = (state.selected === slug) ? null : slug;
+    applySelection();
+  }
+  function stepSel(dir) {
+    var o = ordered().map(function (s) { return s.slug; });
+    var i = o.indexOf(state.selected);
+    var n = i < 0 ? (dir > 0 ? 0 : o.length - 1) : (i + dir + o.length) % o.length;
+    state.selected = o[n];
+    applySelection();
+  }
+
+  function renderInspector() {
+    var s = state.selected ? bySlug(state.selected) : null;
+    insp.classList.toggle('open', !!s);
+    document.body.classList.toggle('has-inspector', !!s);
+    if (!s) return;
+    document.getElementById('inspName').textContent = s.folio + ' ' + s.name;
+    document.getElementById('inspSum').textContent = s.c28 + ' commits · ' + s.activeDays + ' active days';
+    document.getElementById('inspL1').innerHTML = '<span class="m">' + s.c28 + ' commits</span> in 28 days · active <span class="m">' + s.activeDays + '</span> of 28 days';
+    document.getElementById('inspL2').innerHTML = 'Last push ' + s.pushDay + ' (' + s.hoursAgo.toFixed(1) + ' h before the measure) · <span class="m">' + s.wkdayPct + '%</span> Mon to Fri';
+    document.getElementById('inspL3').innerHTML = 'Ships ' + pluralUnit(s) + ' (' + s.content_note + ') · repo ' + fmtKB(s.repo_kb) + ' · page ' + fmtKB(s.page_kb);
+    document.getElementById('inspL4').innerHTML = 'Best day <span class="m">' + s.best_day_date + ': ' + s.best_day_commits + ' commits</span> · busiest hour <span class="m">' + pad2(s.peak_hour) + ':00 UTC</span>';
+    document.getElementById('inspSpark').innerHTML = sparkDaily(s);
+    var v = document.getElementById('inspVisit');
+    v.href = s.url;
+    v.textContent = 'Visit ' + s.name.toLowerCase();
+  }
+
+  function wireSelectable(container, cellClass, onCell) {
+    container.addEventListener('click', function (e) {
+      var t = e.target;
+      if (cellClass && t.classList && t.classList.contains(cellClass)) { onCell(t); return; }
+      if (t.closest && t.closest('a,summary,button')) return;
+      var holder = t.closest ? t.closest('[data-slug]') : null;
+      if (holder) toggleSelect(holder.getAttribute('data-slug'));
+    });
+  }
+
+  function readHash() {
+    var h = location.hash.replace(/^#\/?/, '');
+    h.split('&').forEach(function (kv) {
+      var p = kv.split('=');
+      if (p[0] === 'p' && ['activity', 'recency', 'folio'].indexOf(p[1]) >= 0) state.premise = p[1];
+      if (p[0] === 'm' && MEASURES[p[1]]) state.measure = p[1];
+      if (p[0] === 's' && bySlug(p[1])) state.selected = p[1];
+    });
+  }
+  function writeHash() {
+    var h = '#p=' + state.premise + '&m=' + state.measure + (state.selected ? '&s=' + state.selected : '');
+    try { history.replaceState(null, '', h); } catch (e) {}
   }
 
   function renderAll() {
@@ -582,24 +824,120 @@
     renderMults();
     renderDays();
     renderRhythm();
+    renderHours();
     renderInventory();
     renderLedger();
     renderRegister();
   }
 
+  function pressedIn(group, btn) {
+    document.querySelectorAll(group).forEach(function (b) {
+      b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
+    });
+  }
+
   document.querySelectorAll('[data-premise]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      premise = btn.getAttribute('data-premise');
-      document.querySelectorAll('[data-premise]').forEach(function (b) {
-        b.setAttribute('aria-pressed', b === btn ? 'true' : 'false');
-      });
+      state.premise = btn.getAttribute('data-premise');
+      pressedIn('[data-premise]', btn);
       renderAll();
+      applySelection();
     });
   });
 
+  document.querySelectorAll('[data-measure]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      state.measure = btn.getAttribute('data-measure');
+      pressedIn('[data-measure]', btn);
+      renderChart();
+      applySelection();
+    });
+  });
+
+  document.querySelectorAll('[data-scale]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var key = btn.getAttribute('data-scale');
+      state[key] = btn.getAttribute('data-val');
+      pressedIn('[data-scale="' + key + '"]', btn);
+      if (key === 'dayScale') renderDays(); else renderRhythm();
+      applySelection();
+    });
+  });
+
+  wireSelectable(field, null, null);
+  wireSelectable(chartEl, null, null);
+  wireSelectable(multsEl, null, null);
+  wireSelectable(daysEl, 'dc', function (cell) {
+    var holder = cell.closest('[data-slug]');
+    var s = holder ? bySlug(holder.getAttribute('data-slug')) : null;
+    dayReadout.textContent = cell.getAttribute('data-date') + ' · ' + (s ? s.name : '') + ' · ' + cell.getAttribute('data-n') + ' commits';
+  });
+  daysEl.addEventListener('mouseover', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('dc')) {
+      var holder = t.closest('[data-slug]');
+      var s = holder ? bySlug(holder.getAttribute('data-slug')) : null;
+      dayReadout.textContent = t.getAttribute('data-date') + ' · ' + (s ? s.name : '') + ' · ' + t.getAttribute('data-n') + ' commits';
+    }
+  });
+  wireSelectable(rhythmEl, null, null);
+  wireSelectable(hoursEl, 'hc', function (cell) {
+    var holder = cell.closest('[data-slug]');
+    var s = holder ? bySlug(holder.getAttribute('data-slug')) : null;
+    hourReadout.textContent = cell.getAttribute('data-h') + ':00 UTC · ' + (s ? s.name : '') + ' · ' + cell.getAttribute('data-n') + ' commits';
+  });
+  hoursEl.addEventListener('mouseover', function (e) {
+    var t = e.target;
+    if (t.classList && t.classList.contains('hc')) {
+      var holder = t.closest('[data-slug]');
+      var s = holder ? bySlug(holder.getAttribute('data-slug')) : null;
+      hourReadout.textContent = t.getAttribute('data-h') + ':00 UTC · ' + (s ? s.name : '') + ' · ' + t.getAttribute('data-n') + ' commits';
+    }
+  });
+  wireSelectable(invEl, null, null);
+  wireSelectable(lbarEl, null, null);
+  wireSelectable(lkeyEl, null, null);
+  wireSelectable(registerEl, null, null);
+
+  document.getElementById('inspToggle').addEventListener('click', function () {
+    var body = document.getElementById('inspBody');
+    var open = body.hasAttribute('hidden');
+    if (open) body.removeAttribute('hidden'); else body.setAttribute('hidden', '');
+    this.setAttribute('aria-expanded', open ? 'true' : 'false');
+    document.querySelector('.insp-chev').textContent = open ? '−' : '+';
+  });
+  document.getElementById('inspClose').addEventListener('click', function (e) {
+    e.stopPropagation();
+    state.selected = null;
+    applySelection();
+  });
+  document.getElementById('inspPrev').addEventListener('click', function (e) { e.stopPropagation(); stepSel(-1); });
+  document.getElementById('inspNext').addEventListener('click', function (e) { e.stopPropagation(); stepSel(1); });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') { state.selected = null; applySelection(); }
+    else if (e.key === 'ArrowRight') { stepSel(1); e.preventDefault(); }
+    else if (e.key === 'ArrowLeft') { stepSel(-1); e.preventDefault(); }
+  });
+
+  function syncFromHash() {
+    state.premise = 'activity'; state.measure = 'commits'; state.selected = null;
+    readHash();
+    pressedIn('[data-premise]', document.querySelector('[data-premise="' + state.premise + '"]'));
+    pressedIn('[data-measure]', document.querySelector('[data-measure="' + state.measure + '"]'));
+    renderAll();
+    applySelection();
+  }
+  window.addEventListener('hashchange', syncFromHash);
+
+  readHash();
+  pressedIn('[data-premise]', document.querySelector('[data-premise="' + state.premise + '"]'));
+  pressedIn('[data-measure]', document.querySelector('[data-measure="' + state.measure + '"]'));
   renderSources();
   renderAll();
+  applySelection();
 })();
+
 </script>
 </body>
 </html>
