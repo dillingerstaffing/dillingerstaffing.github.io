@@ -1,4 +1,79 @@
-<!doctype html>
+#!/usr/bin/env python3
+"""Build the Index Folio index.html from measured data.
+
+Data: /tmp/folio-data/assembled.json (GitHub repo statistics, measured 2026-09-18)
+plus live content counts verified the same day.
+Every visualization answers one question; every mark passes the data-ink test.
+"""
+import json, datetime
+
+D = json.load(open('/tmp/folio-data/assembled.json'))
+
+META = {
+ 'portfolio':      dict(folio='01', name='Portfolio', slug='portfolio',
+   url='https://dillingerstaffing.github.io/portfolio/',
+   evidence='Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.'),
+ 'proving-ground': dict(folio='02', name='Proving Ground', slug='proving-ground',
+   url='https://dillingerstaffing.github.io/proving-ground/',
+   evidence='Seventy-two interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.'),
+ 'notebook':       dict(folio='03', name='Notebook', slug='notebook',
+   url='https://dillingerstaffing.github.io/notebook/',
+   evidence='The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.'),
+ 'ghostlight':     dict(folio='04', name='GHOSTLIGHT', slug='ghostlight',
+   url='https://dillingerstaffing.github.io/ghostlight/',
+   evidence='Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.'),
+ 'wigmore':        dict(folio='05', name='Wigmore', slug='wigmore',
+   url='https://dillingerstaffing.github.io/wigmore/',
+   evidence='A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.'),
+ 'old-iron':       dict(folio='06', name='OLD IRON', slug='old-iron',
+   url='https://dillingerstaffing.github.io/old-iron/',
+   evidence='A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.'),
+ 'tapeout':        dict(folio='07', name='TAPEOUT', slug='tapeout',
+   url='https://dillingerstaffing.github.io/tapeout/',
+   evidence='A lean distribution page with no fake inventory, plus an open lab log of real progress.'),
+ 'unstuck':        dict(folio='08', name='UNSTUCK', slug='unstuck',
+   url='https://dillingerstaffing.github.io/unstuck/',
+   evidence='A one-page card: a plain-language fix list, a three-step process, tap-to-call.'),
+ 'signs':          dict(folio='09', name='Signs', slug='signs',
+   url='https://dillingerstaffing.github.io/signs/',
+   evidence="An experimental text-to-semiotics instrument using Peirce's own terms throughout."),
+}
+
+CONTENT = {
+ 'portfolio': (187, 'projects', '37 articles'), 'proving-ground': (72, 'benches', 'one per day'),
+ 'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (10, 'walkthroughs', 'GH-001 to GH-010'),
+ 'wigmore': (1, 'chart builder', 'strict schema'), 'old-iron': (1, 'service page', 'pickup and wiping'),
+ 'tapeout': (1, 'service page', 'open lab log'), 'unstuck': (1, 'service page', 'plain words'),
+ 'signs': (1, 'instrument', 'text to semiotics'),
+}
+
+sites = []
+for slug, m in META.items():
+    d = D[slug]
+    n, unit, note = CONTENT[slug]
+    sites.append(dict(
+        folio=m['folio'], name=m['name'], slug=slug, url=m['url'], evidence=m['evidence'],
+        weekly=d['weekly'], daily=d['daily28'], dow=d['dow'], c28=d['c28'],
+        repo_kb=d['repo_kb'], page_kb=d['page_kb'], pushed=d['pushed'],
+        content_n=n, content_unit=unit, content_note=note,
+    ))
+
+sites.sort(key=lambda s: s['folio'])
+DATA_DATE = '2026-09-18T20:17:04Z'
+data_js = json.dumps(sites, separators=(',', ':'))
+
+# verdict facts
+tot28 = sum(s['c28'] for s in sites)
+top_active = max(sites, key=lambda s: sum(1 for v in s['daily'] if v > 0))
+top_active_n = sum(1 for v in top_active['daily'] if v > 0)
+wkday = sum(sum(s['dow'][1:6]) for s in sites)
+wkend = sum(s['dow'][0] + s['dow'][6] for s in sites)
+wk_pct = round(100 * wkday / (wkday + wkend))
+top2 = sorted(sites, key=lambda s: -s['c28'])[:2]
+top2_pct = round(100 * sum(s['c28'] for s in top2) / tot28)
+top_content = max(sites, key=lambda s: s['content_n'])
+
+html = '''<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8" />
@@ -292,29 +367,29 @@
     <h2>Day by day.</h2>
     <p class="key-line">Columns run week by week, rows Sunday to Saturday. Darker means more commits.</p>
     <div class="days" id="days"></div>
-    <p class="verdict-line">Portfolio stayed active 11 of the last 28 days, more than any other site. <span class="m">394 commits.</span></p>
+    <p class="verdict-line">__DAYS_VERDICT__</p>
   </section>
 
   <section class="section" id="rhythm-s">
     <p class="kicker">05 · The rhythm</p>
     <h2>When the work lands.</h2>
     <div class="mults" id="rhythm"></div>
-    <p class="verdict-line">87% of all commits land Monday to Friday. <span class="m">The loops work weekdays; weekends go quiet.</span></p>
+    <p class="verdict-line">__RHYTHM_VERDICT__</p>
   </section>
 
   <section class="section" id="inventory-s">
     <p class="kicker">06 · The inventory</p>
     <h2>What the commits built.</h2>
     <div class="chart" id="inventory"></div>
-    <p class="verdict-line">Portfolio ships the most content: <span class="m">187 projects and 37 articles.</span></p>
+    <p class="verdict-line">__INV_VERDICT__</p>
   </section>
 
   <section class="section" id="ledger-s">
     <p class="kicker">07 · The ledger</p>
     <h2>Share of the month.</h2>
-    <div class="lbar" id="lbar" role="img" aria-label="Share of 1004 commits in the last 28 days by site"></div>
+    <div class="lbar" id="lbar" role="img" aria-label="__LEDGER_ARIA__"></div>
     <div class="lkey" id="lkey"></div>
-    <p class="verdict-line">Portfolio and Proving Ground together take 59% of the month. <span class="m">1004 commits across nine sites.</span></p>
+    <p class="verdict-line">__LEDGER_VERDICT__</p>
   </section>
 
   <section class="section" id="register-s">
@@ -344,8 +419,8 @@
 <script>
 (function () {
   "use strict";
-  var DATA_DATE = Date.parse('2026-09-18T20:17:04Z');
-  var SITES = [{"folio":"01","name":"Portfolio","slug":"portfolio","url":"https://dillingerstaffing.github.io/portfolio/","evidence":"Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.","weekly":[0,0,0,0,0,0,0,0,0,0,304,90],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,9,36,112,92,55,9,18,18,31,10,4],"dow":[9,18,27,67,122,96,55],"c28":394,"repo_kb":23708,"page_kb":400,"pushed":"2026-09-18T16:14:21Z","content_n":187,"content_unit":"projects","content_note":"37 articles"},{"folio":"02","name":"Proving Ground","slug":"proving-ground","url":"https://dillingerstaffing.github.io/proving-ground/","evidence":"Seventy-two interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.","weekly":[0,0,0,0,0,0,0,0,0,0,122,77],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,18,42,50,12,10,3,25,11,22,6],"dow":[10,3,25,30,64,56,12],"c28":199,"repo_kb":7768,"page_kb":106,"pushed":"2026-09-18T18:50:44Z","content_n":72,"content_unit":"benches","content_note":"one per day"},{"folio":"03","name":"Notebook","slug":"notebook","url":"https://dillingerstaffing.github.io/notebook/","evidence":"The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.","weekly":[0,0,0,0,0,0,0,0,0,0,0,3],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,1,0],"dow":[0,0,0,2,1,0,0],"c28":3,"repo_kb":295,"page_kb":292,"pushed":"2026-09-18T00:08:32Z","content_n":9,"content_unit":"patterns","content_note":"the reusable nine"},{"folio":"04","name":"GHOSTLIGHT","slug":"ghostlight","url":"https://dillingerstaffing.github.io/ghostlight/","evidence":"Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.","weekly":[0,0,0,0,0,0,0,0,0,0,0,40],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,23,7,10,0],"dow":[0,0,23,7,10,0,0],"c28":40,"repo_kb":9361,"page_kb":24,"pushed":"2026-09-17T19:47:38Z","content_n":10,"content_unit":"walkthroughs","content_note":"GH-001 to GH-010"},{"folio":"05","name":"Wigmore","slug":"wigmore","url":"https://dillingerstaffing.github.io/wigmore/","evidence":"A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.","weekly":[0,0,0,0,0,0,0,0,0,0,0,32],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,22,8,2,0],"dow":[0,0,22,8,2,0,0],"c28":32,"repo_kb":640,"page_kb":101,"pushed":"2026-09-17T01:27:24Z","content_n":1,"content_unit":"chart builder","content_note":"strict schema"},{"folio":"06","name":"OLD IRON","slug":"old-iron","url":"https://dillingerstaffing.github.io/old-iron/","evidence":"A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.","weekly":[0,0,0,0,0,0,0,0,0,0,77,59],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,27,24,19,7,12,15,15,6,10,1],"dow":[12,15,15,33,34,20,7],"c28":136,"repo_kb":1916,"page_kb":64,"pushed":"2026-09-18T06:32:58Z","content_n":1,"content_unit":"service page","content_note":"pickup and wiping"},{"folio":"07","name":"TAPEOUT","slug":"tapeout","url":"https://dillingerstaffing.github.io/tapeout/","evidence":"A lean distribution page with no fake inventory, plus an open lab log of real progress.","weekly":[0,0,0,0,0,0,0,0,0,0,77,67],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,29,26,16,6,12,12,15,14,12,2],"dow":[12,12,15,43,38,18,6],"c28":144,"repo_kb":3325,"page_kb":67,"pushed":"2026-09-18T06:33:03Z","content_n":1,"content_unit":"service page","content_note":"open lab log"},{"folio":"08","name":"UNSTUCK","slug":"unstuck","url":"https://dillingerstaffing.github.io/unstuck/","evidence":"A one-page card: a plain-language fix list, a three-step process, tap-to-call.","weekly":[0,0,0,0,0,0,0,0,0,0,0,31],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,4,2,7,6,5,7],"dow":[4,2,7,6,5,7,0],"c28":31,"repo_kb":233,"page_kb":29,"pushed":"2026-09-18T13:38:26Z","content_n":1,"content_unit":"service page","content_note":"plain words"},{"folio":"09","name":"Signs","slug":"signs","url":"https://dillingerstaffing.github.io/signs/","evidence":"An experimental text-to-semiotics instrument using Peirce's own terms throughout.","weekly":[0,0,0,0,0,0,0,0,0,0,0,25],"daily":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,2,21,2,0],"dow":[0,0,2,21,2,0,0],"c28":25,"repo_kb":460,"page_kb":83,"pushed":"2026-09-17T01:27:14Z","content_n":1,"content_unit":"instrument","content_note":"text to semiotics"}];
+  var DATA_DATE = Date.parse('__DATA_DATE__');
+  var SITES = __DATA_JSON__;
   var MAXW = Math.max.apply(null, SITES.map(function (s) { return Math.max.apply(null, s.weekly); }));
 
   SITES.forEach(function (s) {
@@ -546,7 +621,7 @@
 
   function spark(s) {
     return '<svg width="84" height="20" viewBox="0 0 84 20" role="img" aria-label="' + s.c28 + ' commits in 28 days">' +
-      weekBars(s, 84, 20).replace(/var\(--sanguine\)/g, 'var(--ink-soft)') + '</svg>';
+      weekBars(s, 84, 20).replace(/var\\(--sanguine\\)/g, 'var(--ink-soft)') + '</svg>';
   }
 
   function fmtKB(n) { return n.toLocaleString('en-US') + ' KB'; }
@@ -556,8 +631,8 @@
     ordered().forEach(function (s) {
       html += '<article class="entry"><span class="entry-no">' + s.folio + '</span><div>' +
         '<h3><a href="' + s.url + '">' + s.name + '</a></h3>' +
-        '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days \u00B7 pushed ' + s.pushDay + '</span></p>' +
-        '<p class="entry-vitals"><b>' + s.activeDays + '</b> of 28 days active \u00B7 repo ' + fmtKB(s.repo_kb) + ' \u00B7 page ' + fmtKB(s.page_kb) + '</p>' +
+        '<p class="entry-meta">' + spark(s) + '<span>' + s.c28 + ' commits / 28 days \\u00B7 pushed ' + s.pushDay + '</span></p>' +
+        '<p class="entry-vitals"><b>' + s.activeDays + '</b> of 28 days active \\u00B7 repo ' + fmtKB(s.repo_kb) + ' \\u00B7 page ' + fmtKB(s.page_kb) + '</p>' +
         '<details><summary>More</summary><div class="evidence-body">' + s.evidence + ' Ships ' + pluralUnit(s) + ' (' + s.content_note + ').</div></details>' +
         '<a class="visit" href="' + s.url + '">Visit ' + s.name.toLowerCase() + '</a>' +
         '</div></article>';
@@ -570,7 +645,7 @@
     SITES.slice().sort(function (a, b) { return a.folio < b.folio ? -1 : 1; }).forEach(function (s) {
       html += '<li><span class="src-no">' + s.folio + '</span><div>' +
         '<a href="https://github.com/dillingerstaffing/' + s.slug + '">github.com/dillingerstaffing/' + s.slug + '</a>' +
-        '<span class="snote">' + s.c28 + ' commits in 28 days \u00B7 pushed ' + s.pushDay + '</span></div></li>';
+        '<span class="snote">' + s.c28 + ' commits in 28 days \\u00B7 pushed ' + s.pushDay + '</span></div></li>';
     });
     document.getElementById('sourceList').innerHTML = html;
   }
@@ -603,3 +678,28 @@
 </script>
 </body>
 </html>
+'''
+
+html = html.replace('__DATA_JSON__', data_js)
+html = html.replace('__DATA_DATE__', DATA_DATE)
+html = html.replace('__DAYS_VERDICT__',
+    '%s stayed active %d of the last 28 days, more than any other site. <span class="m">%d commits.</span>'
+    % (top_active['name'], top_active_n, top_active['c28']))
+html = html.replace('__RHYTHM_VERDICT__',
+    '%d%% of all commits land Monday to Friday. <span class="m">The loops work weekdays; weekends go quiet.</span>' % wk_pct)
+def _plural(n, unit):
+    return '%d %s%s' % (n, unit, '' if n == 1 or unit.endswith('s') else 's')
+html = html.replace('__INV_VERDICT__',
+    '%s ships the most content: <span class="m">%s and %s.</span>'
+    % (top_content['name'], _plural(top_content['content_n'], top_content['content_unit']), CONTENT['portfolio'][2]))
+html = html.replace('__LEDGER_VERDICT__',
+    '%s and %s together take %d%% of the month. <span class="m">%d commits across nine sites.</span>'
+    % (top2[0]['name'], top2[1]['name'], top2_pct, tot28))
+html = html.replace('__LEDGER_ARIA__',
+    'Share of %d commits in the last 28 days by site' % tot28)
+
+open('/home/hatch/workspace/deploy/index-site/index.html', 'w').write(html)
+print('wrote', len(html), 'bytes')
+print('days verdict:', top_active['name'], top_active_n)
+print('rhythm verdict:', wk_pct)
+print('ledger verdict:', top2[0]['name'], top2[1]['name'], top2_pct, tot28)
