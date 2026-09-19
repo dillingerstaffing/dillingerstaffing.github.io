@@ -26,6 +26,9 @@ evidence margins, small multiples), and the information flow answer, evidence, r
   Visit when the machine wins.
 - Signs (https://dillingerstaffing.github.io/signs/): an experiment classifying text into Peirce's ten sign classes.
   Visit to watch the machine read.
+- Cigarettes (https://dillingerstaffing.github.io/cigarettes/): a brand ledger comparing 53 cigarette brands across
+  19 factors, tar, nicotine, and CO machine yields, product design, smoke chemistry, smoking behavior, and human biology.
+  Measurements are kept strictly separate from human dose. Visit to compare brands on evidence, not vibes.
 
 ## Contact
 

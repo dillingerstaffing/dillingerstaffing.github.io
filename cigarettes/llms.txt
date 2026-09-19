@@ -1,0 +1,25 @@
+# Cigarette Comparison
+
+An interactive brand ledger at https://dillingerstaffing.github.io/cigarettes/ comparing 53 cigarette brands
+across 19 factors in five categories: standardized measurements, product design, smoke chemistry, user behavior,
+and user biology.
+
+Core rule of the dataset: FTC machine yields (tar, nicotine, CO, in mg per cigarette) are standardized product
+characteristics measured by a smoking machine. They are not human doses. Actual exposure depends on how a person
+smokes (puffing, vent blocking, compensation, cigarettes per day, inhalation depth) and on their biology
+(nicotine metabolism through CYP2A6, tolerance, preexisting health).
+
+## What the page offers
+
+- A two-brand comparison bench with machine-yield metrics and pack glyphs.
+- Three switchable scatterplots of tar, nicotine, and CO across all 53 brands.
+- An interactive exposure-workload register (dials for behavior and biology inputs).
+- Constituent-to-body pathways for nicotine, tar, and carbon monoxide.
+- All 19 factors as expandable entries, each stating what the factor is, what it means, and how it affects the smoker.
+- A searchable, sortable atlas of all 53 brands.
+- Source links and a JSON download of the full dataset.
+
+## Data limits
+
+53 entries, mostly historical US products. 13 entries lack a sourced measurement year. Sources are global rather
+than record-specific. No per-brand disease scores are given; that would require evidence the dataset does not have.
