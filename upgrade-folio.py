@@ -121,11 +121,11 @@ NEW_JS = r"""(function () {
     });
     out += '<line x1="' + (CX - 225) + '" y1="' + CY + '" x2="' + (CX + 225) + '" y2="' + CY + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
     out += '<line x1="' + CX + '" y1="' + (CY - 205) + '" x2="' + CX + '" y2="' + (CY + 205) + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
-    var centerWord = state.premise === 'activity' ? 'MOST UPDATED' : state.premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-09';
+    var centerWord = state.premise === 'activity' ? 'MOST UPDATED' : state.premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-08';
     out += '<text x="' + CX + '" y="' + (CY + 4) + '" text-anchor="middle" font-family="var(--font-technical)" font-size="9" letter-spacing="0.08em" fill="var(--graphite)">' + centerWord + '</text>';
     order.forEach(function (s, i) {
       var ang = (-90 + i * 137.5) * Math.PI / 180;
-      var rr = 36 + i * (168 / 8);
+      var rr = 36 + i * (168 / 7);
       var x = CX + rr * Math.cos(ang), y = CY + rr * Math.sin(ang);
       var nr = nodeR(s);
       var style;
@@ -157,7 +157,7 @@ NEW_JS = r"""(function () {
       var p = top.pushed.slice(0, 16).replace('T', ' ');
       verdictLine.innerHTML = top.name + ' was touched most recently: <span class="m">pushed ' + p + ' UTC.</span>';
     } else {
-      verdictLine.innerHTML = 'Folio order: <span class="m">nine sites, 01 to 09.</span>';
+      verdictLine.innerHTML = 'Folio order: <span class="m">eight sites, 01 to 08.</span>';
     }
   }
 

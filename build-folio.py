@@ -34,9 +34,6 @@ META = {
  'unstuck':        dict(folio='08', name='UNSTUCK', slug='unstuck',
    url='https://dillingerstaffing.github.io/unstuck/',
    evidence='A one-page card: a plain-language fix list, a three-step process, tap-to-call.'),
- 'signs':          dict(folio='09', name='Signs', slug='signs',
-   url='https://dillingerstaffing.github.io/signs/',
-   evidence="An experimental text-to-semiotics instrument using Peirce's own terms throughout."),
 }
 
 CONTENT = {
@@ -44,7 +41,6 @@ CONTENT = {
  'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (10, 'walkthroughs', 'GH-001 to GH-010'),
  'wigmore': (1, 'chart builder', 'strict schema'), 'old-iron': (1, 'service page', 'pickup and wiping'),
  'tapeout': (1, 'service page', 'open lab log'), 'unstuck': (1, 'service page', 'plain words'),
- 'signs': (1, 'instrument', 'text to semiotics'),
 }
 
 sites = []
@@ -86,22 +82,22 @@ html = '''<!doctype html>
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <link rel="manifest" href="manifest.json" />
   <title>The Index Folio, Chris Dillinger</title>
-  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, Signs semiotics, and the Notebook design language." />
+  <meta name="description" content="One page indexing every working site by Chris Dillinger: the RISC-V and kernel portfolio, the Proving Ground benches, GHOSTLIGHT red-team walkthroughs, Wigmore evidence charts, OLD IRON hardware retirement, TAPEOUT lean compute parts, UNSTUCK plain-words computer help, and the Notebook design language." />
   <link rel="canonical" href="https://dillingerstaffing.github.io/" />
   <meta property="og:title" content="The Index Folio, Chris Dillinger" />
-  <meta property="og:description" content="Nine working sites on one page." />
+  <meta property="og:description" content="Eight working sites on one page." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dillingerstaffing.github.io/" />
   <meta property="og:image" content="https://dillingerstaffing.github.io/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit." />
+  <meta property="og:image:alt" content="The Index Folio: eight working sites, each with a one-line reason to visit." />
   <meta property="og:site_name" content="The Index Folio" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="The Index Folio, Chris Dillinger" />
-  <meta name="twitter:description" content="Nine working sites on one page." />
+  <meta name="twitter:description" content="Eight working sites on one page." />
   <meta name="twitter:image" content="https://dillingerstaffing.github.io/og-image.png" />
-  <meta name="twitter:image:alt" content="The Index Folio: nine working sites, each with a one-line reason to visit." />
+  <meta name="twitter:image:alt" content="The Index Folio: eight working sites, each with a one-line reason to visit." />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -345,7 +341,7 @@ html = '''<!doctype html>
       <button class="control" data-premise="folio" aria-pressed="false">Folio order</button>
     </div>
     <div class="field-wrap">
-      <svg id="field" viewBox="0 0 680 440" role="img" aria-label="Diagram of the nine sites. The most updated sites sit nearest the center, drawn darkest and largest."></svg>
+      <svg id="field" viewBox="0 0 680 440" role="img" aria-label="Diagram of the eight sites. The most updated sites sit nearest the center, drawn darkest and largest."></svg>
     </div>
     <p class="verdict-line" id="verdictLine" aria-live="polite"></p>
   </section>
@@ -407,7 +403,7 @@ html = '''<!doctype html>
   <section class="section" id="provenance">
     <p class="kicker">10 · Provenance</p>
     <h2>Provenance.</h2>
-    <p class="quiet" style="max-width:46rem">Commit counts: GitHub repository statistics (commit activity and punch card endpoints), measured 2026-09-18. Content units counted from the live pages the same day. All nine repositories were created between Sep 8 and Sep 17, 2026, so every commit falls inside the 28-day window. Push times UTC.</p>
+    <p class="quiet" style="max-width:46rem">Commit counts: GitHub repository statistics (commit activity and punch card endpoints), measured 2026-09-18. Content units counted from the live pages the same day. All eight repositories were created between Sep 8 and Sep 17, 2026, so every commit falls inside the 28-day window. Push times UTC.</p>
     <ul class="source-list" id="sourceList"></ul>
   </section>
 
@@ -470,11 +466,11 @@ html = '''<!doctype html>
     });
     out += '<line x1="' + (CX - 225) + '" y1="' + CY + '" x2="' + (CX + 225) + '" y2="' + CY + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
     out += '<line x1="' + CX + '" y1="' + (CY - 205) + '" x2="' + CX + '" y2="' + (CY + 205) + '" stroke="var(--graphite)" stroke-width="1" opacity="0.3"/>';
-    var centerWord = premise === 'activity' ? 'MOST UPDATED' : premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-09';
+    var centerWord = premise === 'activity' ? 'MOST UPDATED' : premise === 'recency' ? 'MOST RECENT' : 'FOLIO 01-08';
     out += '<text x="' + CX + '" y="' + (CY + 4) + '" text-anchor="middle" font-family="var(--font-technical)" font-size="9" letter-spacing="0.08em" fill="var(--graphite)">' + centerWord + '</text>';
     order.forEach(function (s, i) {
       var ang = (-90 + i * 137.5) * Math.PI / 180;
-      var rr = 36 + i * (168 / 8);
+      var rr = 36 + i * (168 / 7);
       var x = CX + rr * Math.cos(ang), y = CY + rr * Math.sin(ang);
       var nr = nodeR(s);
       var style;
@@ -504,7 +500,7 @@ html = '''<!doctype html>
       var p = top.pushed.slice(0, 16).replace('T', ' ');
       verdictLine.innerHTML = top.name + ' was touched most recently: <span class="m">pushed ' + p + ' UTC.</span>';
     } else {
-      verdictLine.innerHTML = 'Folio order: <span class="m">nine sites, 01 to 09.</span>';
+      verdictLine.innerHTML = 'Folio order: <span class="m">eight sites, 01 to 08.</span>';
     }
   }
 
@@ -693,7 +689,7 @@ html = html.replace('__INV_VERDICT__',
     '%s ships the most content: <span class="m">%s and %s.</span>'
     % (top_content['name'], _plural(top_content['content_n'], top_content['content_unit']), CONTENT['portfolio'][2]))
 html = html.replace('__LEDGER_VERDICT__',
-    '%s and %s together take %d%% of the month. <span class="m">%d commits across nine sites.</span>'
+    '%s and %s together take %d%% of the month. <span class="m">%d commits across eight sites.</span>'
     % (top2[0]['name'], top2[1]['name'], top2_pct, tot28))
 html = html.replace('__LEDGER_ARIA__',
     'Share of %d commits in the last 28 days by site' % tot28)
