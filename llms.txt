@@ -24,9 +24,6 @@ evidence margins, small multiples), and the information flow answer, evidence, r
   tested, honest R&D log. Visit to buy parts without theater.
 - UNSTUCK (https://dillingerstaffing.github.io/unstuck/): computer help in plain words, one visit at a time.
   Visit when the machine wins.
-- Cigarettes (https://dillingerstaffing.github.io/cigarettes/): a brand ledger comparing 53 cigarette brands across
-  19 factors, tar, nicotine, and CO machine yields, product design, smoke chemistry, smoking behavior, and human biology.
-  Measurements are kept strictly separate from human dose. Visit to compare brands on evidence, not vibes.
 
 ## Contact
 
