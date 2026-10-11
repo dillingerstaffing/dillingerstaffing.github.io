@@ -20,8 +20,8 @@ evidence margins, small multiples), and the information flow answer, evidence, r
   claims, support, and doubt, shareable by link. Visit to reason in public.
 - OLD IRON (https://dillingerstaffing.github.io/old-iron/): retirement for servers and GPUs. Free pickup, certified
   NIST 800-88 data wiping, insured logistics. Visit when hardware is done earning.
-- TAPEOUT (https://dillingerstaffing.github.io/tapeout/): lean compute-hardware distribution. Quoted parts, burn-in
-  tested, honest R&D log. Visit to buy parts without theater.
+- TAPEOUT (https://dillingerstaffing.github.io/tapeout/): lean compute-hardware distribution. One-unit limited offers
+  at target prices, an open R&D lab, burn-in testing on request. Visit to buy parts without theater.
 - UNSTUCK (https://dillingerstaffing.github.io/unstuck/): computer help in plain words, one visit at a time.
   Visit when the machine wins.
 
