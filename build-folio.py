@@ -15,7 +15,7 @@ META = {
    evidence='Proof cards across five layers (ISA, microarch, firmware, kernel, algorithm); a blog that teaches one atomic idea per post; a curated reading wire. New Proving Ground benches graduate into portfolio proof cards.'),
  'proving-ground': dict(folio='02', name='Proving Ground', slug='proving-ground',
    url='https://dillingerstaffing.github.io/proving-ground/',
-   evidence='Seventy-two interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.'),
+   evidence='Eighty-six interactive benches across computer architecture, analog and power electronics, and bench craft, one per day.'),
  'notebook':       dict(folio='03', name='Notebook', slug='notebook',
    url='https://dillingerstaffing.github.io/notebook/',
    evidence='The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.'),
@@ -37,7 +37,7 @@ META = {
 }
 
 CONTENT = {
- 'portfolio': (187, 'projects', '37 articles'), 'proving-ground': (72, 'benches', 'one per day'),
+ 'portfolio': (187, 'projects', '37 articles'), 'proving-ground': (86, 'benches', 'one per day'),
  'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (10, 'walkthroughs', 'GH-001 to GH-010'),
  'wigmore': (1, 'chart builder', 'strict schema'), 'old-iron': (1, 'service page', 'pickup and wiping'),
  'tapeout': (1, 'service page', 'open lab log'), 'unstuck': (1, 'service page', 'plain words'),

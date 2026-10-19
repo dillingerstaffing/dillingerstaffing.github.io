@@ -10,7 +10,7 @@ evidence margins, small multiples), and the information flow answer, evidence, r
 
 - Portfolio (https://dillingerstaffing.github.io/portfolio/): first-principles RISC-V, C, and OS kernel work.
   Every claim backed by a runnable demo. Visit to vet the work and to hire Chris for board, firmware, or kernel problems.
-- Proving Ground (https://dillingerstaffing.github.io/proving-ground/): 70 interactive benches, one mechanism each,
+- Proving Ground (https://dillingerstaffing.github.io/proving-ground/): 86 interactive benches, one mechanism each,
   taught why-first. Visit to build engineering intuition you can check by hand.
 - Notebook (https://dillingerstaffing.github.io/notebook/): the complete design language this index is written in,
   sourced to Leonardo, Tufte, and Distill. Visit to learn the method.
