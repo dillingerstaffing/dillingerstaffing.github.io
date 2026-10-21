@@ -21,7 +21,7 @@ META = {
    evidence='The complete language: material grammar, composition grammar, nine reusable patterns, information flow, the quality gate, and the build audit.'),
  'ghostlight':     dict(folio='04', name='GHOSTLIGHT', slug='ghostlight',
    url='https://dillingerstaffing.github.io/ghostlight/',
-   evidence='Walkthroughs GH-001 through GH-010 with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.'),
+   evidence='Thirty walkthroughs with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.'),
  'wigmore':        dict(folio='05', name='Wigmore', slug='wigmore',
    url='https://dillingerstaffing.github.io/wigmore/',
    evidence='A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.'),
@@ -38,7 +38,7 @@ META = {
 
 CONTENT = {
  'portfolio': (187, 'projects', '37 articles'), 'proving-ground': (86, 'benches', 'one per day'),
- 'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (10, 'walkthroughs', 'GH-001 to GH-010'),
+ 'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (30, 'walkthroughs', 'GH-001 to GH-030'),
  'wigmore': (1, 'chart builder', 'strict schema'), 'old-iron': (1, 'service page', 'pickup and wiping'),
  'tapeout': (1, 'service page', 'open lab log'), 'unstuck': (1, 'service page', 'plain words'),
 }
