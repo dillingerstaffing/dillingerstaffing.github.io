@@ -24,7 +24,7 @@ META = {
    evidence='Thirty walkthroughs with real screen recordings, mapped to MITRE ATT&CK TA0005 and D3FEND defenders.'),
  'wigmore':        dict(folio='05', name='Wigmore', slug='wigmore',
    url='https://dillingerstaffing.github.io/wigmore/',
-   evidence='A chart builder with strict Wigmore schema validation, a built-in example, and a localStorage collection.'),
+   evidence='A chart builder with strict Wigmore schema validation, a built-in example, and charts saved in your browser.'),
  'old-iron':       dict(folio='06', name='OLD IRON', slug='old-iron',
    url='https://dillingerstaffing.github.io/old-iron/',
    evidence='A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.'),
