@@ -30,7 +30,7 @@ META = {
    evidence='A terse service page: what is picked up, how wiping is certified per serial, how logistics are insured.'),
  'tapeout':        dict(folio='07', name='TAPEOUT', slug='tapeout',
    url='https://dillingerstaffing.github.io/tapeout/',
-   evidence='A lean distribution page with no fake inventory, plus an open lab log of real progress.'),
+   evidence='A lean distribution page with no fake inventory, plus one open board study.'),
  'unstuck':        dict(folio='08', name='UNSTUCK', slug='unstuck',
    url='https://dillingerstaffing.github.io/unstuck/',
    evidence='A one-page card: a plain-language fix list, a three-step process, tap-to-call.'),
@@ -40,7 +40,7 @@ CONTENT = {
  'portfolio': (187, 'projects', '37 articles'), 'proving-ground': (86, 'benches', 'one per day'),
  'notebook': (9, 'patterns', 'the reusable nine'), 'ghostlight': (30, 'walkthroughs', 'GH-001 to GH-030'),
  'wigmore': (1, 'chart builder', 'strict schema'), 'old-iron': (1, 'service page', 'pickup and wiping'),
- 'tapeout': (1, 'service page', 'open lab log'), 'unstuck': (1, 'service page', 'plain words'),
+ 'tapeout': (1, 'service page', 'open board study'), 'unstuck': (1, 'service page', 'plain words'),
 }
 
 sites = []
